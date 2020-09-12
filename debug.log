@@ -1,0 +1,201 @@
+[0806/233731.069:ERROR:process_info.cc(329)] VirtualQueryEx: Acceso denegado. (0x5)
+[0806/233731.124:ERROR:process_info.cc(556)] ReadMemoryInfo failed
+[0806/233731.124:ERROR:process_memory_win.cc(39)] Failed to initialize ProcessInfo.
+[0806/233730.924:ERROR:process_reader_win.cc(123)] NtOpenThread: {Acceso denegado} Un proceso ha solicitado acceso a un objeto, pero no se le han concedido esos derechos de acceso. (0xc0000022)
+[0806/233730.924:ERROR:process_reader_win.cc(123)] NtOpenThread: {Acceso denegado} Un proceso ha solicitado acceso a un objeto, pero no se le han concedido esos derechos de acceso. (0xc0000022)
+[0806/233730.960:ERROR:process_reader_win.cc(123)] NtOpenThread: {Acceso denegado} Un proceso ha solicitado acceso a un objeto, pero no se le han concedido esos derechos de acceso. (0xc0000022)
+[0806/233731.137:ERROR:scoped_process_suspend.cc(40)] NtResumeProcess: Se intentó obtener acceso a un proceso que está cerrándose. (0xc000010a)
+[0806/233731.166:ERROR:exception_snapshot_win.cc(98)] thread ID 11328 not found in process
+[0806/233730.924:ERROR:process_reader_win.cc(123)] NtOpenThread: {Acceso denegado} Un proceso ha solicitado acceso a un objeto, pero no se le han concedido esos derechos de acceso. (0xc0000022)
+[0806/233730.924:ERROR:process_reader_win.cc(123)] NtOpenThread: {Acceso denegado} Un proceso ha solicitado acceso a un objeto, pero no se le han concedido esos derechos de acceso. (0xc0000022)
+[0806/233731.167:ERROR:exception_snapshot_win.cc(98)] thread ID 2716 not found in process
+[0806/233730.924:ERROR:process_reader_win.cc(123)] NtOpenThread: {Acceso denegado} Un proceso ha solicitado acceso a un objeto, pero no se le han concedido esos derechos de acceso. (0xc0000022)
+[0806/233730.924:ERROR:process_reader_win.cc(123)] NtOpenThread: {Acceso denegado} Un proceso ha solicitado acceso a un objeto, pero no se le han concedido esos derechos de acceso. (0xc0000022)
+[0806/233730.924:ERROR:process_reader_win.cc(123)] NtOpenThread: {Acceso denegado} Un proceso ha solicitado acceso a un objeto, pero no se le han concedido esos derechos de acceso. (0xc0000022)
+[0806/233731.167:ERROR:exception_snapshot_win.cc(98)] thread ID 3576 not found in process
+[0806/233731.167:ERROR:exception_snapshot_win.cc(98)] thread ID 2880 not found in process
+[0806/233731.167:ERROR:exception_snapshot_win.cc(98)] thread ID 3416 not found in process
+[0806/233731.167:ERROR:exception_snapshot_win.cc(98)] thread ID 6876 not found in process
+[0806/233731.167:ERROR:exception_snapshot_win.cc(98)] thread ID 7440 not found in process
+[0806/233731.168:ERROR:exception_snapshot_win.cc(98)] thread ID 9912 not found in process
+[0806/233731.168:ERROR:scoped_process_suspend.cc(40)] NtResumeProcess: Se intentó obtener acceso a un proceso que está cerrándose. (0xc000010a)
+[0806/233731.582:ERROR:process_reader_win.cc(123)] NtOpenThread: {Acceso denegado} Un proceso ha solicitado acceso a un objeto, pero no se le han concedido esos derechos de acceso. (0xc0000022)
+[0806/233731.582:ERROR:exception_snapshot_win.cc(98)] thread ID 5564 not found in process
+[0808/104850.987:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0808/104851.001:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0811/155549.262:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0811/155549.279:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0811/170605.304:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0811/170605.307:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0812/094825.465:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0812/094825.473:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0818/185055.862:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0818/185055.880:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0819/083151.643:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0819/083151.669:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0820/000153.071:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0820/000153.071:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0820/145315.933:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0820/145316.016:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0821/224510.862:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0821/224510.866:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0822/135205.146:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0822/135205.151:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0822/145408.567:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0822/145408.570:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0822/183532.099:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0822/183532.114:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0822/190033.765:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0822/190033.768:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0823/093426.991:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0823/093426.994:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0824/172457.831:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0824/172457.833:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0825/150617.661:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0825/150617.745:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0826/172202.902:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0826/172202.905:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0827/094854.917:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0827/094854.922:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0828/194759.935:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0828/194759.937:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0829/082601.729:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0829/082601.786:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0829/082606.319:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0829/082606.322:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0829/083601.736:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0829/083601.737:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0829/083601.739:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0829/083601.739:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0829/084101.794:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0829/084101.794:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0829/085601.799:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0829/085601.800:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0829/091101.806:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0829/091101.808:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0829/092600.780:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0829/092600.780:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0829/094101.121:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0829/094101.201:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0829/095601.244:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0829/095601.246:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0829/101101.304:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0829/101101.304:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0829/102601.309:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0829/102601.311:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0829/104101.317:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0829/104101.318:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0829/105601.324:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0829/105601.325:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0829/111101.331:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0829/111101.332:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0829/112601.337:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0829/112601.339:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0829/114101.343:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0829/114101.344:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0829/115601.347:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0829/115601.349:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0829/121101.354:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0829/121101.356:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0829/122601.362:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0829/122601.364:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0829/124101.369:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0829/124101.370:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0829/125601.376:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0829/125601.377:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0829/125719.541:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0829/125719.546:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0829/131101.383:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0829/131101.384:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0829/132601.387:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0829/132601.389:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0829/134101.396:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0829/134101.397:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0829/135601.401:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0829/135601.402:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0829/141101.406:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0829/141101.407:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0829/142601.410:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0829/142601.410:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0829/144101.413:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0829/144101.414:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0829/145601.436:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0829/145601.437:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0829/151101.477:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0829/151101.478:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0829/152601.486:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0829/152601.487:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0829/154101.495:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0829/154101.500:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0829/155601.505:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0829/155601.506:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0829/160116.089:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0829/160116.093:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0829/161101.516:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0829/161101.517:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0829/162601.527:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0829/162601.528:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0829/164101.532:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0829/164101.533:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0829/165601.538:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0829/165601.538:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0829/171101.542:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0829/171101.544:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0829/172601.549:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0829/172601.550:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0829/174101.562:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0829/174101.564:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0829/175601.570:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0829/175601.571:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0829/180522.876:ERROR:process_reader_win.cc(123)] NtOpenThread: {Acceso denegado} Un proceso ha solicitado acceso a un objeto, pero no se le han concedido esos derechos de acceso. (0xc0000022)
+[0829/180522.917:ERROR:process_reader_win.cc(123)] NtOpenThread: {Acceso denegado} Un proceso ha solicitado acceso a un objeto, pero no se le han concedido esos derechos de acceso. (0xc0000022)
+[0829/180522.918:ERROR:process_reader_win.cc(123)] NtOpenThread: {Acceso denegado} Un proceso ha solicitado acceso a un objeto, pero no se le han concedido esos derechos de acceso. (0xc0000022)
+[0829/180522.982:ERROR:process_reader_win.cc(123)] NtOpenThread: {Acceso denegado} Un proceso ha solicitado acceso a un objeto, pero no se le han concedido esos derechos de acceso. (0xc0000022)
+[0829/180522.941:ERROR:process_reader_win.cc(123)] NtOpenThread: {Acceso denegado} Un proceso ha solicitado acceso a un objeto, pero no se le han concedido esos derechos de acceso. (0xc0000022)
+[0829/180522.895:ERROR:process_reader_win.cc(123)] NtOpenThread: {Acceso denegado} Un proceso ha solicitado acceso a un objeto, pero no se le han concedido esos derechos de acceso. (0xc0000022)
+[0829/180523.025:ERROR:exception_snapshot_win.cc(98)] thread ID 8536 not found in process
+[0829/180522.925:ERROR:process_reader_win.cc(123)] NtOpenThread: {Acceso denegado} Un proceso ha solicitado acceso a un objeto, pero no se le han concedido esos derechos de acceso. (0xc0000022)
+[0829/180522.935:ERROR:process_reader_win.cc(123)] NtOpenThread: {Acceso denegado} Un proceso ha solicitado acceso a un objeto, pero no se le han concedido esos derechos de acceso. (0xc0000022)
+[0829/180523.026:ERROR:exception_snapshot_win.cc(98)] thread ID 8668 not found in process
+[0829/180523.026:ERROR:exception_snapshot_win.cc(98)] thread ID 9564 not found in process
+[0829/180523.026:ERROR:exception_snapshot_win.cc(98)] thread ID 7592 not found in process
+[0829/180523.026:ERROR:exception_snapshot_win.cc(98)] thread ID 5224 not found in process
+[0829/180523.026:ERROR:exception_snapshot_win.cc(98)] thread ID 11008 not found in process
+[0829/180522.928:ERROR:process_reader_win.cc(123)] NtOpenThread: {Acceso denegado} Un proceso ha solicitado acceso a un objeto, pero no se le han concedido esos derechos de acceso. (0xc0000022)
+[0829/180523.026:ERROR:exception_snapshot_win.cc(98)] thread ID 8156 not found in process
+[0829/180523.026:ERROR:exception_snapshot_win.cc(98)] thread ID 2460 not found in process
+[0829/180522.886:ERROR:process_reader_win.cc(123)] NtOpenThread: {Acceso denegado} Un proceso ha solicitado acceso a un objeto, pero no se le han concedido esos derechos de acceso. (0xc0000022)
+[0829/180523.026:ERROR:exception_snapshot_win.cc(98)] thread ID 7964 not found in process
+[0829/180523.027:ERROR:exception_snapshot_win.cc(98)] thread ID 8588 not found in process
+[0829/230249.055:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0829/230249.059:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0830/180508.891:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0830/180508.894:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0902/155507.110:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0902/155507.128:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0903/195843.591:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0903/195843.594:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0903/210631.570:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0903/210631.874:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0903/210631.882:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0903/210631.882:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0903/210631.938:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0903/210631.946:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0903/210632.290:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0903/210632.298:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0904/070241.352:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0904/070241.400:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0904/101829.434:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0904/101829.438:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0904/120225.977:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0904/120225.981:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0905/164117.131:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0905/164117.139:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0906/130803.527:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0906/130803.529:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0907/095001.258:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0907/095001.305:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0908/094045.581:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0908/094045.607:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0909/100817.939:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0909/100817.939:ERROR:crash_report_database_win.cc(469)] failed to stat report
