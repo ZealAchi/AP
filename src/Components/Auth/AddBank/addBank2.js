@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { View,ScrollView } from 'react-native'
+import { View, ScrollView } from 'react-native'
 import { Block } from '../../../UI/Block'
 import Colors from '../../../UI/Colors'
 import { ItemBank } from '../../../UI/ItemBank'
@@ -16,22 +16,22 @@ import { Header } from '../../../UI/Header'
 import { dp } from '../../../UI/dist/Responsive.dev'
 
 
-export function AddBank2({ route,navigation }) {
+export function AddBank2({ route, navigation }) {
     const API = useAPI()
     const [disabled, setDisabled] = useState(false)
     const [rut_number, setRut_number] = useState()
     const [password, setPassword] = useState()
     const bank = 'Itau'
     const { params } = route
-    const data = { nombre: params.name, img:params.imagen }
+    const data = { nombre: params.name, img: params.imagen }
     const ConectarBanco = () => {
         const EsValido = validate(rut_number)
         if (!rut_number) { AlertMessage({ message: 'Debes Ingresar una RUT' }) } else {
-            if(!password) AlertMessage({ message: 'Debes Ingresar una clave' })
-            if(password>8){
+            if (!password) AlertMessage({ message: 'Debes Ingresar una clave' })
+            if (password > 8) {
                 AlertMessage({ message: 'La clave tiene que ser más de 8 caracteres' })
             }
-            if(password<12){
+            if (password < 12) {
                 AlertMessage({ message: 'La clave tiene que ser menos de 12 caracteres' })
             }
             // if (password<12&&password>8&&EsValido) {
@@ -47,15 +47,14 @@ export function AddBank2({ route,navigation }) {
         }
     }
     return (
-        <ScreenContainer backgroundColor={Colors.Secondary} padding scrollView>
-            <Header Return/>
-            <ScrollView>
-                
-            <View style={{ paddingLeft: 12, paddingRight: 12,height:dp(1.58) }}>
-            <View style={{}}><Texto size={12} colorLabel={Colors.midnightblue} Bold style={{marginBottom:30}}>Agregar banco</Texto>
+        <View style={{ flex: 1, display: 'flex', padding:10}}>
+            <Header Return />
+
+            <View style={{ paddingLeft: 12, paddingRight: 12, flex:1.2}}>
+                <View style={{}}><Texto size={12} colorLabel={Colors.midnightblue} Bold style={{ marginBottom: 30 }}>Agregar banco</Texto>
                     <ItemBank type="ConectBank" nostyle data={data} />
                 </View>
-                <Texto size={12} colorLabel={Colors.Texto4} style={{marginTop:30}}>{`Introduce tus claves de acceso a ${params.name}`}</Texto>
+                <Texto size={12} colorLabel={Colors.Texto4} style={{ marginTop: 30 }}>{`Introduce tus claves de acceso a ${params.name}`}</Texto>
                 <View>
                     <TextInput placeholder="Ingresa tu RUT" value={rut_number} onChangeText={(e) => setRut_number(e)} />
                     <Texto size={12} colorLabel={Colors.Texto2}>Sin puntos ni guión</Texto>
@@ -65,8 +64,8 @@ export function AddBank2({ route,navigation }) {
                     {/* <Texto size={12} colorLabel={Colors.Texto2}>De 8 a 10 caracteres alfanuméricos</Texto> */}
                 </View>
                 <View style={{ marginTop: 40, alignItems: 'center' }}>
-                    <Button onPress={()=>{navigation.navigate('QueSonYPorQue')}} backgroundColor='white' styleButton={{ display: 'flex', width: 338, elevation: 12 }} >
-                        <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly', justifyContent:'center',alignItems: 'center'}}>
+                    <Button onPress={() => { navigation.navigate('QueSonYPorQue') }} backgroundColor='white' styleButton={{ display: 'flex', width: 338, elevation: 12 }} >
+                        <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly', justifyContent: 'center', alignItems: 'center' }}>
                             <Ionicons name="lock-closed" style={{ marginRight: 12 }} color={Colors.Primary} size={23} />
                             <Texto colorLabel={Colors.Texto4} size={12}>¿Qué claves son y por qué te las pedimos?</Texto>
                             <Ionicons name="ios-arrow-forward" style={{ marginLeft: 12 }} color={Colors.Primary} size={23} />
@@ -75,10 +74,10 @@ export function AddBank2({ route,navigation }) {
 
                 </View>
             </View>
-            </ScrollView>
-            <View style={{height:dp(.1)}}>
-            <Button disabled={disabled} onPress={() => ConectarBanco()} styleButton={{ position: 'absolute', bottom: 20, right: 50, left: 50, borderRadius: 18 }} label="CONECTAR BANCO" />
+
+            <View style={{ flex: 1,  flexDirection: 'column-reverse' ,zIndex:-12,alignItems:'center'}}>
+                <Button disabled={disabled} onPress={() => ConectarBanco()} styleButton={{ position: 'absolute',right: 50, left: 50, borderRadius: 18 }} label="CONECTAR BANCO" />
             </View>
-        </ScreenContainer>
+        </View>
     )
 }

@@ -40,6 +40,7 @@
         android:configChanges="keyboard|keyboardHidden|orientation|screenSize|uiMode"
         android:launchMode="singleTask"
         android:windowSoftInputMode="adjustResize"
+        android:screenOrientation="portrait"
         >
         
         <intent-filter>

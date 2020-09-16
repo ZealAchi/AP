@@ -37,9 +37,11 @@ export function UpdatePerfil() {
         setState({
             first_name: Context.state.user.profile.first_name,
             last_name: Context.state.user.profile.last_name,
-            email: Context.state.user.profile.email
+            email: Context.state.user.profile.email,
+            phone:Context.state.user.profile.phone
         })
     }, [])
+    console.log(Context,'Context')
     const [image, setImage] = useState('')
 
     const UploadImage = () => {
@@ -101,7 +103,7 @@ export function UpdatePerfil() {
         </View>
         <View>
             <Texto size={12}>Telefono</Texto>
-            <TextInput backgroundColor={'transparent'} placeholder="7721235778" value={state.phone} onChangeText={(e) => { setState({ ...state, phone: e }) }}></TextInput>
+            <TextInput backgroundColor={'transparent'} placeholder="7721235778" value={state.phone} /*onChangeText={(e) => { setState({ ...state, phone: e }) }}*/></TextInput>
         </View>
         </ScrollView>
         </View>

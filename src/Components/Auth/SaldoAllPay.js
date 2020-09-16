@@ -32,32 +32,36 @@ export function SaldoAllPay(props) {
     }, [route?.params?.amount])
 
     return (<View style={{ display: 'flex', flex: 1, backgroundColor: Colors.Secondary }}>
-        
-            <View style={{height: 70, marginLeft: 5, marginTop: 12, borderBottomColor: Colors.lavender, borderBottomWidth: 1 }}>
-                <Header Return />
-                <View style={{ justifyContent: 'center' }}>
-                    <Texto colorLabel={Colors.midnightblue} size={13} Bold>Agregar saldo AllPay</Texto>
-        
+
+        <View style={{ height: 70, marginLeft: 5, marginTop: 12, borderBottomColor: Colors.lavender, borderBottomWidth: 1 }}>
+            <Header Return />
+            <View style={{ justifyContent: 'center' }}>
+                <Texto colorLabel={Colors.midnightblue} size={13} Bold>Agregar saldo AllPay</Texto>
+
             </View>
         </View>
-        <View style={{ height: 65, justifyContent: 'center' }}>
+        <View style={{ height: 65, justifyContent: 'center',display:'flex',flexDirection:'row'}}>
+            
             <ItemBank2 style={{ backgroundColor: 'transparent' }} allpay data={{ img: require('../../Assets/AP.png'), balance: balances?.AllPay?.amount }} />
+            
         </View>
-        <View style={{ height: 220, backgroundColor: Colors.Primary, alignItems: 'center' }}>
-            <Texto size={13} colorLabel="white">¿Cuánto dinero deseas cargar?</Texto>
+        <View style={{ height: 195, backgroundColor: Colors.Primary, alignItems: 'center'}}>
+            <Texto style={{marginTop:12}} size={13} colorLabel="white">¿Cuánto dinero deseas cargar?</Texto>
             <View style={{ width: 256, height: 80, flex: 1 }}>
                 <View style={{ borderBottomColor: Colors.lavender, borderBottomWidth: 1, alignItems: 'baseline' }}>
                     <TextInput placeholderTextColor="white" left sizeIcon={35}
                         icon={{ type: 'Foundation', name: 'dollar', color: 'white' }}
                         keyboardType="numeric"
                         maxLength={13}
-                        styleText={[monto ? { fontSize: 30, right: 12, fontWeight: '700' } : { fontSize: 22.8, right: 12, fontWeight: '700' },
+                        styleText={[monto ? 
+                           { fontSize: 30, right: 12, fontWeight: '700' } : { right: 8, fontSize: dp(0.06) },
+                            // { fontSize: 30, right: 12, fontWeight: '700' } : { fontSize: 22.8, right: 12, fontWeight: '700' },
                         { textAlign: 'center', color: 'white' }]} style={{ backgroundColor: 'transparent' }}
                         value={monto} onChangeText={(e) => setMonto(
                             formatNumber.new(e.replace(/\D/g, '')))
                         } placeholder="Ingresa el monto" />
                 </View>
-                <View style={{ alignItems: 'center', justifyContent: 'center', flex: 1, marginBottom: 24 }}>
+                <View style={{ alignItems: 'center', justifyContent: 'center', flex: 1, marginBottom: 45 }}>
                     <Texto size={13} colorLabel="white">¿Desde qué cuenta deseas cargar?</Texto>
                 </View>
             </View>

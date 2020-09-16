@@ -20,7 +20,6 @@ export function Welcome({ navigation }) {
             }
         }, 1000)
     }, [])
-
     
 // useEffect(()=> {
 //     console.log(password,'password')

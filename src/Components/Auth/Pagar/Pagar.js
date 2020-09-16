@@ -1,8 +1,7 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable no-trailing-spaces */
 import React, { useState, useEffect, useContext } from 'react'
-import { View, Pressable, BackHandler } from 'react-native'
-import { ScreenContainer } from '../../ScreenContainer'
+import { View, Pressable, BackHandler, StatusBar } from 'react-native'
 import { Texto } from '../../../UI/Texto'
 import { TextInput } from '../../../UI/Input'
 import Colors from '../../../UI/Colors'
@@ -19,7 +18,8 @@ import { DataContext } from '../../../Context/Datos.Context'
 import { useAPI } from '../../../Hooks/useAPI'
 import { formatNumber } from '../../../Util/FormatNumber'
 import { dp } from '../../../UI/dist/Responsive.dev'
-import { ScrollView } from 'react-native-gesture-handler'
+import { vh } from 'react-native-css-vh-vw'
+
 
 export function Pagar(props) {
     const API = useAPI()
@@ -31,8 +31,6 @@ export function Pagar(props) {
     const Currency = '152'
     const [message, setMessage] = useState('')
 
-
-
     const { params } = route
     const { type, data, params: paramsP } = params
 
@@ -42,7 +40,9 @@ export function Pagar(props) {
         earned: '213',
         uuid: data?.uuid
     }
-    const disableNow = () => setDisabled(false)
+    const disableNow = () => {setDisabled(false);
+        
+    }
     const payUser = () => {
         try {
             const newMonto = (monto[0] === '0' ? monto.substring(1) : monto).replace(/\D/g, '')
@@ -50,9 +50,6 @@ export function Pagar(props) {
             const b = parseInt(balances?.AllPay?.amount.replace(/\D/g, ''))
 
             if (a > b) {
-
-                // console.log( a>b, `${a}>${b} con variables`)
-                // console.log(newMonto>balances?.AllPay?.amount.replace(/\D/g, ''),'Default')
                 AlertMessage({ message: "No tienes saldo suficiente." })
                 disableNow()
 
@@ -78,7 +75,11 @@ export function Pagar(props) {
                             }
                         }, 'payUser')
                     }
-                    navigation.push('EnterYourPin', { type: 'transfer', cancel: () => { disableNow() }, nextAction: WalletSend })
+                    navigation.push('EnterYourPin', {
+                        type: 'transfer', cancel: () => { disableNow();navigation.pop(); },
+                    pay: (sx) => {console.log('cuack',sx);WalletSend()},
+                        nextAction: () => { navigation.pop(); return disableNow(); }
+                    })
                 }
         } catch (error) {
             console.log(error, 'error')
@@ -112,8 +113,10 @@ export function Pagar(props) {
         setMonto(paramsP.monto)
         setMessage(paramsP.message)
     }, [paramsP])
+    StatusBar.setBackgroundColor(Colors.Tertiary)
+
     return <View style={{ flex: 1, display: 'flex' }}>
-        <View style={{ height: 220, backgroundColor: Colors.Tertiary }}>
+        <View style={{ height: vh(31), backgroundColor: Colors.Tertiary }}>
             <View style={{ marginTop: 12, paddingLeft: 12, paddingRight: 12, height: dp(0.1) }}>
                 <Header Return color={Colors.Secondary} onPressBack={() => { setMonto(undefined); setMessage(undefined); navigation.pop(); }} />
             </View>
@@ -131,30 +134,32 @@ export function Pagar(props) {
                                 formatNumber.new(e.replace(/\D/g, '')))
                             } placeholder="Ingresa el monto" />
                     </View>
-                    <View style={{ alignItems: 'center', justifyContent: 'center', flex: 1, marginBottom: 24 }}>
+                    <View style={{ alignItems: 'center', justifyContent: 'center', flex: 1, marginBottom: 45 }}>
                         <Texto size={13} colorLabel="white">¿Desde qué cuenta deseas transferir?</Texto>
                     </View>
                 </View>
             </View>
-            <View style={{position:'absolute',height: 90, width: '100%', backgroundColor: 'transparent', bottom: -45, alignItems: 'flex-end', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                    <ItemBank2 onPress={() => navigation.navigate('MyAccounts', { setSelect: setAccount, type })} allpay style={{ zIndex: 1, elevation: 2, width: '95%', height: 75, borderRadius: 12 }} title={'cuentas'} data={{ img: require('../../../Assets/AP.png'), balance: balances?.AllPay?.amount }} />
-                </View>
+            <View style={{ position: 'absolute', height: 90, width: '100%', backgroundColor: 'transparent', bottom: -45, alignItems: 'flex-end', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                <ItemBank2 onPress={() => navigation.navigate('MyAccounts', { setSelect: setAccount, type })} allpay style={{ zIndex: 1, elevation: 2, width: '95%', height: 75, borderRadius: 12 }} title={'cuentas'} data={{ img: require('../../../Assets/AP.png'), balance: balances?.AllPay?.amount }} />
+            </View>
 
         </View>
 
-        <View style={{ flex: 1, backgroundColor: Colors.Secondary, flexDirection: 'column-reverse' ,zIndex:-12,alignItems:'center'}}>
+        <View style={{ flex: 1, backgroundColor: Colors.Secondary, flexDirection: 'column-reverse', zIndex: -12, alignItems: 'center' }}>
             <Button disabled={disabled} onPress={() => {
                 if (monto) {
                     setDisabled(true)
                     payUser()
                 }
                 if (!monto) AlertMessage({ message: "Debes Ingresar un monto" })
-            }} styleButton={{ width: 218, borderRadius: 18,marginBottom:15, }} label="TRANSFERIR" />
+            }} styleButton={{ width: vh(30), borderRadius: 18, marginBottom: 10, }} label="TRANSFERIR" />
             <TextInput style={{
                 width: '9%', height: 115.48, textAlignVertical: 'top',
-                marginLeft:28,
-                marginRight:28,
-                marginBottom:25,
+                marginLeft: 28,
+                paddingLeft: 12,
+                paddingRight: 12,
+                marginRight: 28,
+                marginBottom: 18,
                 shadowColor: '#000',
                 shadowOffset: { width: 0, height: 2 },
                 shadowOpacity: 0.8,

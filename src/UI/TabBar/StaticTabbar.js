@@ -2,6 +2,7 @@
 /* eslint-disable no-trailing-spaces */
 import React, { useEffect, useState } from 'react';
 import { useFocusEffect } from '@react-navigation/native';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
 
 import { View, StyleSheet, TouchableWithoutFeedback, Animated, Dimensions, Image, Pressable } from 'react-native';
 import Colors from '../Colors';
@@ -106,12 +107,16 @@ export default function StaticTabbar(props) {
                                                 navigation.navigate('PagarHome',{top:true})
                                             }}
                                         ><Image source={require('./icons/Pagar.png')} style={{ height: 30, width: 32 }} /></Pressable>}
-                                    {tab.name === 'Cobrar' &&
+                                    {tab.name === 'Mis Bancos' &&
                                         <Pressable
                                             onPress={() => {
-                                                // navigation.navigate('CobrarHome')
+                                                navigation.navigate('MyAccounts')
                                             }}
-                                        ><Image source={require('./icons/Cobrar.png')} style={{ height: 30, width: 32 }} /></Pressable>}
+                                        >
+                                            
+                                            <FontAwesome5 name="wallet" size={26} color={Colors.darkgray} style={{}} />
+                                            {/* <Image source={require('./icons/Cobrar.png')} style={{ height: 30, width: 32 }} /> */}
+                                            </Pressable>}
                                     {/* {tab.name==='Tarjetas'&&<Image source={require('./icons/Default.png')} style={{ height: 32, width: 32 }} />} */}
                                     {tab.name === 'Compartir Tarjeta' &&
                                         <Pressable
@@ -128,7 +133,7 @@ export default function StaticTabbar(props) {
                                             height: 32, width: 9
                                         }} /></Pressable>}
                                     {/* <Texto size={9} colorLabel={Colors.darkgray}>{(tab.name!=='Tarjetas'||tab.name!=='Cobrar')&&tab.name}</Texto> */}
-                                    <Texto size={9} colorLabel={Colors.darkgray}>{(tab.name!==('Tarjetas'&&'Cobrar'))&&tab.name}</Texto>
+                                    <Texto size={9} colorLabel={Colors.darkgray}>{(tab.name!==('Tarjetas'))&&tab.name}</Texto>
 
                                 </Animated.View>
                             </TouchableWithoutFeedback>

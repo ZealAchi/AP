@@ -26,7 +26,7 @@ const tabs = [
         name: 'Transferir',
     },
     {
-        name: 'Cobrar',
+        name: 'Mis Bancos',
     },
     {
         name: 'Tarjetas',

@@ -13,8 +13,8 @@ import { ItemUser } from './ItemUser';
 import { ContactsContext } from '../Context/Contacts.Context';
 import { useAPI } from '../Hooks/useAPI';
 import { DataContext } from '../Context/Datos.Context';
-export const ContactsM = memo(({ params,home, type, searchContact = [] }) => {
-  const { state: stateContext=[], setState: setStateContext } = useContext(ContactsContext)
+export const ContactsM = memo(({ params, home, type, searchContact = [] }) => {
+  const { state: stateContext = [], setState: setStateContext } = useContext(ContactsContext)
   const Context = useContext(DataContext)
   const [phoneNumbers, setPhoneNumbers] = useState()
   const [state, setState] = useState({
@@ -34,50 +34,50 @@ export const ContactsM = memo(({ params,home, type, searchContact = [] }) => {
     setState({ ...state, contacts, loading: state })
   }
 
-  useEffect( () => {
+  useEffect(() => {
     let isSubscribed = true;
     try {
       if (!stateContext?.contacts) {
-      PermissionsAndroid.request(
-        PermissionsAndroid.PERMISSIONS.READ_CONTACTS,
-        {
-          'title': 'Contacts',
-          'message': 'This app would like to view your contacts.',
-          'buttonPositive': 'Please accept bare mortal'
-        }
-      ).then(async() => {
-        await Contacts.getAll((err, contacts) => {
-          if (err === 'denied') {
-            alert('')
-          } else {
-            // contacts
-            let phone_contacts = []
-            for (let i = 0; i < contacts.length; i++) {
-              for (let n = 0; n < contacts[i].phoneNumbers.length; n++) {
-                contacts[i].phoneNumbers.map((item, i) => {
-                  let phone = item.number.replace(/-/g, '')
-                  phone = phone.replace(/ /g, '')
-                  phone = phone.toString().replace('(', '').replace(')', '')
-                  if (phone.length > 4) {
-                    if (phone.toString().substring(0, 1) === "+") {
-                      phone_contacts.push(`${phone}`)
-                    } else {
-                      let Nacionalizar = `+56${phone}`
-                      phone_contacts.push(`${Nacionalizar}`)
-                    }
-                  }
-                })
-              }
-            }
-            API.PostAPI.checkContacts({ phone_contacts: phone_contacts })
-            setContacts(contacts, true)
+        PermissionsAndroid.request(
+          PermissionsAndroid.PERMISSIONS.READ_CONTACTS,
+          {
+            'title': 'Contacts',
+            'message': 'This app would like to view your contacts.',
+            'buttonPositive': 'Please accept bare mortal'
           }
+        ).then(async () => {
+          await Contacts.getAll((err, contacts) => {
+            if (err === 'denied') {
+              alert('')
+            } else {
+              // contacts
+              let phone_contacts = []
+              for (let i = 0; i < contacts.length; i++) {
+                for (let n = 0; n < contacts[i].phoneNumbers.length; n++) {
+                  contacts[i].phoneNumbers.map((item, i) => {
+                    let phone = item.number.replace(/-/g, '')
+                    phone = phone.replace(/ /g, '')
+                    phone = phone.toString().replace('(', '').replace(')', '')
+                    if (phone.length > 4) {
+                      if (phone.toString().substring(0, 1) === "+") {
+                        phone_contacts.push(`${phone}`)
+                      } else {
+                        let Nacionalizar = `+56${phone}`
+                        phone_contacts.push(`${Nacionalizar}`)
+                      }
+                    }
+                  })
+                }
+              }
+              API.PostAPI.checkContacts({ phone_contacts: phone_contacts })
+              setContacts(contacts, true)
+            }
+          })
+
         })
-        
-      })
-    } 
+      }
     } catch (error) {
-     console.log(error,'error') 
+      console.log(error, 'error')
     }
     return () => (isSubscribed = false);
   }, [])
@@ -92,16 +92,16 @@ export const ContactsM = memo(({ params,home, type, searchContact = [] }) => {
 
   const _renderItem = (item, index, section) => {
 
-    const data = { ...item, name: item.displayName?item.displayName:`${item.first_name}${item.last_name}`,match:item.match?item.match:item.displayName?false:true,type: 'Contact' }
+    const data = { ...item, name: item.displayName ? item.displayName : `${item.first_name}${item.last_name}`, match: item.match ? item.match : item.displayName ? false : true, type: 'Contact' }
     return (
       <Pressable onPress={() => {
-        if(data.uuid)
-        type && RootNavigation.navigate(type, {
-          data:data,
-          type:type,
-          params:params
-        })
-        else alert('Este usuario no tiene cuenta deseas invitarlo')        
+        if (data.uuid){
+          type && RootNavigation.navigate(type, {
+            data: data,
+            type: type,
+            params: params
+          })
+        }else alert('Este usuario no tiene cuenta deseas invitarlo')
       }}>
         <View style={{ height: 48.75, backgroundColor: 'transparent', minHeight: 0 }}>
           <ItemUser data={data} Enter />
@@ -169,19 +169,18 @@ export const ContactsM = memo(({ params,home, type, searchContact = [] }) => {
         ) :
         stateContext?.contacts && stateContext.contacts && <SectionListContacts
           sectionListData={
-            
-            home?
-            searchContact.length > 0? searchContact:
-            Context.contactsMatch
-            // console.log(Context.contactsMatch,'Context.contactsMatch')
-            :
-            searchContact.length > 0 ? searchContact : stateContext.contacts}
+            home ?
+              searchContact.length > 0 ? searchContact :
+                Context.contactsMatch
+              // console.log(Context.contactsMatch,'Context.contactsMatch')
+              :
+              searchContact.length > 0 ? searchContact : stateContext.contacts}
           initialNumToRender={
-            home?
-            // searchContact.length > 0? searchContact:
-            Context.contactsMatch.length
-            :
-            searchContact.length > 0 ? searchContact.length : stateContext.contacts.length}
+            home ?
+              // searchContact.length > 0? searchContact:
+              Context.contactsMatch.length
+              :
+              searchContact.length > 0 ? searchContact.length : stateContext.contacts.length}
           otherAlphabet="#"
           showAlphabet={false}
           renderHeader={_renderHeader}

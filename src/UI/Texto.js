@@ -1,4 +1,5 @@
 import { Text } from 'react-native'
+import { vh } from 'react-native-css-vh-vw'
 
 import styled from 'styled-components/native'
 

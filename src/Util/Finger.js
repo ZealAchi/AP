@@ -6,7 +6,6 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 // import FingerprintScanner from 'react-native-fingerprint-scanner';
 import * as RootNavigation from '../Navigations/RootNavigation'
 import { AppState, Platform, View } from 'react-native';
-import { vh } from 'react-native-css-vh-vw'
 import { Modalize } from 'react-native-modalize'
 import { Texto } from '../UI/Texto'
 import { ModalContext } from '../Context/Modal.Context'
@@ -24,10 +23,10 @@ import { DataContext } from '../Context/Datos.Context';
 export function Huellero(props) {
     const localStorage = useLocalStorage()
     const API = useAPI()
-    const {tokenX}=useContext(DataContext)
-    const { type, returnValue, noSave } = props
+    // const { tokenX } = useContext(DataContext)
+    const { type, returnValue, noSave,setShowFinger } = props
     const [state, setState] = useState({
-        popupShowed: false,
+        // popupShowed: false,
         errorMessage: undefined,
         biometric: undefined
     })
@@ -49,7 +48,7 @@ export function Huellero(props) {
 
     useEffect(() => {
 
-        if ('activar' === type || 'login' === type||'transfer'===type) {
+        if ('activar' === type || 'login' === type || 'transfer' === type) {
             if (requiresLegacyAuthentication()) {
                 authLegacy();
             } else {
@@ -61,38 +60,42 @@ export function Huellero(props) {
         }
     }, [])
     function authCurrent() {
-        console.log(type,'type')
+        console.log(type, 'type')
         FingerprintScanner
-            .authenticate({ description: 
-                'activar' === type ? 
-                'Puedes usar tu huella para entrar a AllPay y confirmar movimientos de dinero.' 
-                :'transfer'=== type ?
-                'Ingresa tu huella para confirmar la transferencia.' 
-                : 'Toque el sensor',
-                
-                cancelButton:
-                'activar' === type ?
-                'NO POR AHORA' : 'USAR CONTRASEÑA', title: 'AllPay' })
+            .authenticate({
+                description:
+                    'activar' === type ?
+                        'Puedes usar tu huella para entrar a AllPay y confirmar movimientos de dinero.'
+                        : 'transfer' === type ?
+                            'Ingresa tu huella para confirmar la transferencia.'
+                            : 'Toque el sensor',
+
+                cancelButton: 'activar' === type ?'NO POR AHORA' : 'USAR CONTRASEÑA', title: 'AllPay'
+            })
             .then(() => {
                 if (type === 'transfer') {
                     props?.nextAction()
-                }else
-                if (type === 'login') {
-                    API.PostAPI.login({}, (valido) => {
-                        if (valido) RootNavigation.navigate('App')
-                    }, true)
-                } else {
-                    returnValue()
-                    localStorage.setData('@App:withFinger', JSON.stringify(true))
-                }
+                } else
+                    if (type === 'login') {
+                        API.PostAPI.login({}, (valido) => {
+                            if (valido) RootNavigation.navigate('App')
+                        }, true)
+                    } else {
+                        returnValue()
+                        localStorage.setData('@App:withFinger', JSON.stringify(true))
+                    }
             })
+            // setShowFinger
             .catch((error) => {
+                
+                // console.log(' asdjas j jk kjs ')
+                setShowFinger&&setShowFinger(false)
                 returnValue()
                 if (error.message == 'Authentication was canceled because the user tapped the fallback button (Enter Password).') {
                     noSave()
                 } else {
                     alert(error.message);
-                    noSave&&noSave()
+                    noSave && noSave()
                 }
 
             });
@@ -102,6 +105,7 @@ export function Huellero(props) {
         FingerprintScanner
             .authenticate({ onAttempt: handleAuthenticationAttemptedLegacy })
             .then(() => {
+                console.log('raios :v')
                 props.handlePopupDismissed();
                 // Alert.alert('Fingerprint Authentication', 'Authenticated successfully');
             })

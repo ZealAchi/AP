@@ -196,7 +196,7 @@ export function useAPI() {
         })
         .catch((e) => {
           LoadingCtx.LoadingFalse();
-          AlertMessage({ message: 'El servidor no se encuentra disponible.' });
+          props.identificador!=="getBalance"&&AlertMessage({ message: 'El servidor no se encuentra disponible.' });
           console.log(e, 'error');
           console.log(props, 'props desde la api')
           // console.log(header ? {Authorization: `Bearer ${tokenX?tokenX:token}`} : {},'header ? {Authorization: `Bearer ${tokenX?tokenX:token}`} : {}')

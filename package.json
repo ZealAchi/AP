@@ -49,6 +49,7 @@
     "react-native-indicator": "^1.2.2",
     "react-native-input-credit-card": "^0.5.5",
     "react-native-intl-phone-input": "^1.2.26",
+    "react-native-kill-app": "^1.0.4",
     "react-native-modalize": "^2.0.5",
     "react-native-nfc-card-reader": "^1.0.4",
     "react-native-nfc-manager": "^2.1.9",

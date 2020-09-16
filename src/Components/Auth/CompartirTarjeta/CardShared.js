@@ -51,7 +51,7 @@ export function CardShared({ navigation }) {
     );
     return (
         <ScreenContainer scrollView backgroundColor={'transparent'}>
-            <View style={{ flex: 1, alignItems: 'center' }}>
+            <View style={{ flex: 1, alignItems: 'center',marginTop:12 }}>
                 <FlatList
                     data={DATA}
                     renderItem={renderItem}

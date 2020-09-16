@@ -8234,6 +8234,11 @@ react-native-iphone-x-helper@^1.2.1:
   resolved "https://registry.yarnpkg.com/react-native-iphone-x-helper/-/react-native-iphone-x-helper-1.2.1.tgz#645e2ffbbb49e80844bb4cbbe34a126fda1e6772"
   integrity sha512-/VbpIEp8tSNNHIvstuA3Swx610whci1Zpc9mqNkqn14DkMbw+ORviln2u0XyHG1kPvvwTNGZY6QpeFwxYaSdbQ==
 
+react-native-kill-app@^1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/react-native-kill-app/-/react-native-kill-app-1.0.4.tgz#34c4408a0d09571dc646e5c78a69f3ce8394e371"
+  integrity sha512-+jLoKGsDxHBgUFgo9zb9quBHd81Y/npVxyHbPEzCBgJv+6fNKNnwehoEH8cZv1Z7wXiTYqRCDawZCV4zSVudSw==
+
 react-native-modalize@^2.0.5:
   version "2.0.5"
   resolved "https://registry.yarnpkg.com/react-native-modalize/-/react-native-modalize-2.0.5.tgz#1a9df6864850e93a5c7b0c9fb1a0ded30057f8a0"

@@ -95,6 +95,8 @@ target 'Allpay' do
 
   pod 'react-native-webview', :path => '../node_modules/react-native-webview'
 
+  pod 'react-native-kill-app', :path => '../node_modules/react-native-kill-app'
+
   target 'AllpayTests' do
     inherit! :complete
     # Pods for testing

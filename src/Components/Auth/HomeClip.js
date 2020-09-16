@@ -79,7 +79,7 @@ export function HomeClip({ navigation }) {
     }, []);
 
     const Options = [
-        { label: 'Crear un código QR para transferir', icon: <FontAwesome name="qrcode" color={Colors.Primary} size={23} />, onPress: () => navigation.navigate('CobrarQR') },
+        { label: 'Crear un código QR para recibir plata', icon: <FontAwesome name="qrcode" color={Colors.Primary} size={23} />, onPress: () => navigation.navigate('CobrarQR') },
         { label: 'Invita a amigos y gana premios', icon: <Ionicons name="md-person-add" color={Colors.Primary} size={23} />, onPress: () => navigation.navigate('InvitaGana') },
     ]
     return (
@@ -129,14 +129,14 @@ export function HomeClip({ navigation }) {
                         <View style={{ alignItems: 'center', justifyContent: 'center', paddingTop: 1, marginBottom: 8 }}>
                             {/* <TextInput onChangeText={text => search(contactsMatch, text, setBuscarContacto)} borderRadius left icon={{ type: '', name: 'search' }} style={{ width: 343, height: 38, fontSize: 12, alignItems: 'center', justifyContent: 'center', alignSelf: 'center', backgroundColor: Colors.lavender }} placeholder="Buscar Amigos" /> */}
                         </View>
-                        <View style={{ display: 'flex', flex: 1, borderTopWidth: 1, borderTopColor: Colors.darkgray }}>
+                        {/* <View style={{ display: 'flex', flex: 1, borderTopWidth: 1, borderTopColor: Colors.darkgray }}>
                             {Options.map((item, i) => {
                                 return (<TouchableOpacity key={i} onPress={() => item.onPress()} style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', height: 51, borderBottomColor: Colors.darkgray, borderBottomWidth: 1 }}>
                                     <View style={{ marginLeft: 12 }}>{item.icon}</View>
                                     <View style={{ marginLeft: 12 }}><Texto size={14} colorLabel={Colors.Primary}>{item.label}</Texto></View>
                                 </TouchableOpacity>)
                             })}
-                        </View>
+                        </View> */}
                         <View style={{ marginBottom: 50 }}>
                             {/* <ContactsM searchContact={buscarContacto} type={'History'} home /> */}
                         </View>
@@ -300,7 +300,7 @@ const Carousel3 =
                         </View>
                         <View style={{ alignItems: 'center', flex: 1, display: 'flex', marginBottom: 14, flexDirection: 'row' }}>
                             <View style={{ flex: .15 }} />
-                            <View style={{ flex: .4 }}>
+                            <View style={{ flex: .5 }}>
                                 <ProgressCircle
                                     style={{ flex: 1 }}
                                     progress={1}
@@ -314,7 +314,7 @@ const Carousel3 =
                                     </View>
                                 </ProgressCircle>
                             </View>
-                            <View>
+                            <View  style={{flex:1}}>
                                 <Texto size={12} colorLabel={Colors.Tertiary}>
                                     145%
                                 </Texto>
@@ -386,7 +386,7 @@ const styles = StyleSheet.create({
 
     scrollView: {
         //   flex: 1,
-          backgroundColor: 'white',
+          backgroundColor:Colors.Secondary,
         //   alignItems: 'center',
         //   justifyContent: 'center',
     },

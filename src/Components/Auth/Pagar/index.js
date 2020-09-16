@@ -52,11 +52,11 @@ export function PagarHome(props) {
         
     // StatusBar.setBackgroundColor(Colors.Tertiary)
     const Options = [
-        { label: 'Transferir por WhatsApp', icon: <FontAwesome name="whatsapp" color={Colors.Tertiary} size={23} />, onPress: () => navigation.navigate('CobrarQR',{wt:true}) },
-        { label: 'Crear un código QR para transferir', icon: <FontAwesome name="qrcode" color={Colors.Tertiary} size={23} />, onPress: () => navigation.navigate('CobrarQR') },
-        { label: 'Escanear código QR para transferir', icon: <MaterialCommunityIcons name="qrcode-scan" color={Colors.Tertiary} size={23} />, onPress: () => navigation.navigate('PagarQR') },
+        { label: 'Recibir plata por WhatsApp', icon: <FontAwesome name="whatsapp" color={Colors.Tertiary} size={23} />, onPress: () => navigation.navigate('CobrarQR',{wt:true}) },
+        { label: 'Crear un código QR para recibir plata', icon: <FontAwesome name="qrcode" color={Colors.Tertiary} size={23} />, onPress: () => navigation.navigate('CobrarQR') },
+        { label: 'Escanear código QR para transferir plata', icon: <MaterialCommunityIcons name="qrcode-scan" color={Colors.Tertiary} size={23} />, onPress: () => navigation.navigate('PagarQR') },
         { label: 'Invita a amigos y gana premios', icon: <Ionicons name="md-person-add" color={Colors.Tertiary} size={23} />, onPress: () => navigation.navigate('InvitaGana') },
-        { label: 'Pagar por NFC', icon: <MaterialCommunityIcons name="nfc" color={Colors.Tertiary} size={23} />, onPress: () => {/* navigation.navigate('InvitaGana') */alert('Función no disponible') } },
+        { label: 'Transferir plata por NFC', icon: <MaterialCommunityIcons name="nfc" color={Colors.Tertiary} size={23} />, onPress: () => {/* navigation.navigate('InvitaGana') */alert('Función no disponible') } },
     ]
     return (<ScreenContainer barBackgroundColor={Colors.Tertiary} backgroundColor={Colors.Secondary}>
         <ScrollView ref={scrollRef}>
