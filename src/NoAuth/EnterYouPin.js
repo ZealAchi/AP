@@ -29,7 +29,8 @@ export function EnterYourPin(props) {
     const { navigation, route } = props
     const [otherAmount, setOtherAmount] = useState('')
     const { changeStatus } = useContext(ModalContext)
-    // const { state, withFinger, newPassword, updateNewPassword, getNewUser, isNewUser, password, token } = useContext(DataContext)
+    
+    
     const { state, withFinger, newPassword, updateNewPassword, getNewUser, isNewUser, password, pagarWhats, setPagarWhats, token } = useContext(DataContext)
 
     const Numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9];
@@ -54,13 +55,29 @@ export function EnterYourPin(props) {
             setTimeout(function () {
 
                 LoadingCtx.LoadingFalse()
-                setShowFinger(true)
+                if (type === "transfer" || type === "transferWT"){
+                    setShowFinger(false)
+                    console.log("transfer true sfalse")
+                }else{
+                    setShowFinger(true)
+                    console.log("transfer true true")
+                }
             }, 1000)
         } else {
-            setShowFinger(true)
+            if (type === "transfer" || type === "transferWT"){
+                setShowFinger(false)
+                console.log("else false")
+            }else{
+                setShowFinger(true)
+                console.log("else true")
+            }
+            
         }
     }, [])
+    // console.log( withFinger && showFinger, ' withFinger && showFinger ')
+    // console.log( withFinger ,showFinger ,' withFinger, showFinger ')
     const sendArrayOnlyFinger = () => {
+        console.log('pasar por olnyfinger')
         const NewAmount = otherAmount ? `${formatNumber.new(otherAmount.replace(/\D/g, ''))}` : `${formatNumber.new(data?.amount)}`
         WalletSend({ ...data, amount: JSON.parse(`${NewAmount.replace(/\D/g, '')}00`) })
     }
@@ -109,7 +126,13 @@ export function EnterYourPin(props) {
                     if ("transferWT" === type) {
                         WalletSend({ ...data, amount: JSON.parse(`${NewAmount.replace(/\D/g, '')}00`) })
                     } else {
-                        route?.params?.pay()
+                        // console.log(props,'props')
+                        if(type === "transfer"){
+                            WalletSend({ ...data, amount: JSON.parse(`${NewAmount.replace(/\D/g, '')}00`) })
+                        }else{
+                            route?.params?.pay()
+                        }
+                        
                         // route?.params?.pay?route?.params?.pay(): WalletSend({ ...data, amount: JSON.parse(`${NewAmount.replace(/\D/g, '')}00`) })
                     }
                 } else {
@@ -176,7 +199,7 @@ export function EnterYourPin(props) {
         setPin([...Newdata])
     }
 
-    console.log(props, 'pay orios')
+    // console.log(props, 'pay orios')
     useEffect(() => {
 
         if (type === "transfer" || type === "transferWT") {
@@ -191,7 +214,8 @@ export function EnterYourPin(props) {
                     {
                         text: "SI", onPress: () => {
                             try {
-                                route?.params?.cancel ? route?.params?.cancel() : nextFunction ? nextFunction() :
+                                console.log(route?.params?.cancel ? "cancel" : nextFunction ? "nextfunction" :navigation.goBack &&"goback",'props, transfaret')
+                                route?.params?.cancel ? route.params.cancel() : nextFunction ? nextFunction() :
                                     navigation.goBack && navigation.goBack();
                                 // navigation.()
                                 // return BackHandler.exitApp();
@@ -214,7 +238,7 @@ export function EnterYourPin(props) {
             return () => backHandler.remove();
         } else if (newPassword) {
         } else {
-            console.log(props, 'else :P ')
+            // console.log(props, 'else :P ')
             const backAction = () => {
                 Alert.alert("AllPay", " ¿Estás seguro que quieres salir de la app?", [
                     {
@@ -268,7 +292,7 @@ export function EnterYourPin(props) {
         <ScreenContainer backgroundColor={Colors.Primary} barBackgroundColor={Colors.Secondary} >
             {state.usuarioRUT !== null ?
                 newPassword === false && withFinger && showFinger && <Huellero setShowFinger={setShowFinger} type={
-                    (type === "transfer" || type === "transferWT") ? 'transfer' : 'login'} nextAction={type === "transferWT" ? sendArrayOnlyFinger : route?.params?.pay} />
+                    (type === "transfer" || type === "transferWT") ? 'transfer' : 'login'} nextAction={(type === "transfer" || type === "transferWT")  ? sendArrayOnlyFinger : route?.params?.pay} />
                 : <Modal data={{ pin, setPin: () => setPin([]) }} type='login' />}
             <View style={{ alignItems: 'center', height: vh(45) }}>
                 <View style={{ display: 'flex', flex: 0.3, flexDirection: 'row', alignContent: 'center', justifyContent: 'center' }}>
@@ -332,7 +356,15 @@ export function EnterYourPin(props) {
                         <View style={{ flex: 1 }} />
                     </View>
                     <View style={{ flex: 0 }}>
-                        {!(newPassword || isNewUser) && <Texto colorLabel="white" size={dp(0.055)} style={{ textAlign: 'center' }}>{(type === "transfer" || type === "transferWT") ? 'Cancelar' : 'Olvidé mi PIN'}</Texto>}
+                        {!(newPassword || isNewUser) && <Texto onPress={()=>{
+                            try {
+                                route?.params?.cancel ? route?.params?.cancel() : nextFunction ? nextFunction() :
+                                    navigation.goBack && navigation.goBack();
+                            } catch (error) {
+                                navigation.goBack()
+                                console.log(error, 'error')
+                            }
+                        }} colorLabel="white" size={dp(0.055)} style={{ textAlign: 'center' }}>{(type === "transfer" || type === "transferWT") ? 'Cancelar' : 'Olvidé mi PIN'}</Texto>}
                     </View>
                 </View>
 

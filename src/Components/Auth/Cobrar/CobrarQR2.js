@@ -53,7 +53,7 @@ export function CobrarQR2(props) {
                     </View>
                 </View>
                 <View style={{ position: 'absolute', height: 90, width: '100%', backgroundColor: 'transparent', bottom: -45, alignItems: 'flex-end', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                    <ItemBank2 onPress={() => navigation.navigate('MyAccounts', { setSelect: setAccount, type })} allpay style={{ zIndex: 1, elevation: 2, width: '95%', height: 75, borderRadius: 12 }} title={'cuentas'} noSaldo data={{ img: require('../../../Assets/AP.png') }} />
+                    <ItemBank2 /*onPress={() => navigation.navigate('MyAccounts', { setSelect: setAccount, type })}*/ allpay style={{ zIndex: 1, elevation: 2, width: '95%', height: 75, borderRadius: 12 }} title={'cuentas'} noSaldo data={{ img: require('../../../Assets/AP.png') }} />
                 </View>
             </View>
             <View style={{ zIndex:-2,flex: 1,justifyContent:'center',alignItems:"center", backgroundColor: Colors.Secondary}}>

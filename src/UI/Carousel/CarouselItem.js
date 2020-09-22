@@ -16,7 +16,7 @@ const CarouselItem = (props) => {
 
 const StyledCarouselItem = styled.View`
 flex:1;
-width:${width - 30};
+width:${width - 35};
 margin-right:12px;
 height: ${({heightP})=>heightP?heightP:height};
 border-radius:10;

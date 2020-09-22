@@ -12,9 +12,9 @@ import { DataContext } from '../../../Context/Datos.Context'
 export function History(props) {
     const { type, } = props.route.params
     const {navigation}=props
-    const color = type === "pagar" ? Colors.Tertiary : Colors.Primary;
+    const color = type === "pagar" ? Colors.Primary : Colors.Primary;
     // const {state} =useContext(DataContext)
-    StatusBar.setBackgroundColor(Colors.Tertiary)
+    StatusBar.setBackgroundColor(Colors.Primary)
     
     useEffect(()=>{
         const backAction = () => {

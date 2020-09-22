@@ -29,10 +29,11 @@ import { Cobrar } from '../Components/Auth/Cobrar/Cobrar';
 import { Pagar } from '../Components/Auth/Pagar/Pagar';
 import { SaldoAllPay } from '../Components/Auth/SaldoAllPay';
 import WebView from '../Util/WebView';
-import { Messages } from '../Components/Messages';
+import { Messages, MessagesT } from '../Components/Messages';
 import { History } from '../Components/Auth/History';
 import { RutAndPin } from '../NoAuth/RutAndPin';
 import { QueSonYPorQue } from '../Components/Auth/AddBank/queSonYporQue';
+import { Pay } from '../Components/Auth/Pay';
 
 const RootStack = createStackNavigator()
 
@@ -74,7 +75,9 @@ export const RootStackScreen = () => {
     <RootStack.Screen name="SaldoAllPay" options={{header:()=>null}} component={SaldoAllPay}/>
     <RootStack.Screen name="WebView" options={{header:()=>null}} component={WebView}/>
     <RootStack.Screen name="Messages" options={{header:()=>null}} component={Messages}/>
+    <RootStack.Screen name="MessagesT" options={{header:()=>null}} component={MessagesT}/>
     <RootStack.Screen name="History" options={{header:()=>null}} component={History}/>
+    <RootStack.Screen name="Pay" options={{header:()=>null}} component={Pay}/>
     
   </RootStack.Navigator>)
 }

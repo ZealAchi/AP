@@ -44,10 +44,6 @@ const Carousel = ({ data, typeDotView,height:heightP }) => {
                             </View>
                         </CarouselItem>
                     }}
-                    // onScroll={Animated.event(
-                    //     [{ nativeEvent: { contentOffset: { x: scrollX } } }],
-                    //     {useNativeDriver: true}
-                    // )}
                     onScroll={Animated.event(
                         [{nativeEvent: {contentOffset: {x: scrollX}}}],
                         {useNativeDriver: false}
@@ -61,7 +57,7 @@ const Carousel = ({ data, typeDotView,height:heightP }) => {
 }
 
 const styles = StyleSheet.create({
-    dotView: { flexDirection: 'row', justifyContent: 'center',display:'flex',flex:1,bottom:20}
+    dotView: { flexDirection: 'row', justifyContent: 'center',display:'flex',flex:.8,bottom:20}
 })
 
 export default Carousel

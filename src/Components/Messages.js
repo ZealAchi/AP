@@ -44,19 +44,42 @@ function typeMessage({message, answer}) {
                 return 'Tu carga de saldo no pudo ser realizada.'
         }
     }
-    // console.log(message,'message', answer,' answer')
-    // switch (message) {
-    //     case 1:
-    //         return 'Tarjeta agregada con exito.';
-    //     case 2:
-    //         return 'Banco agregado con exito.';
-    //     case 3:
-    //         getkindOfAnswer(answer)
-    //     default:
-    //         return ''
-    // }
 }
 
-//  5.689.910.010
-//          1.000
-//  5.689.909.010
+
+
+
+
+
+export function MessagesT(props) {
+    const { kindOfAnswer=1  } = props.route.params
+
+    useEffect(() => {
+        setTimeout(() => {
+            props.navigation.pop();
+        }, 6500)
+    }, [])
+    
+    return (
+        <ScreenContainer barBackgroundColor={Colors.Primary}>
+            <StyledMessages>
+                <AntDesign name={`${kindOfAnswer}`==='1'?"checkcircle":
+                `${kindOfAnswer}`==='0'?"closecircle":
+                "closecircle"} size={82} color="white" />
+                {/* <Entypo name="" */}
+                <Texto colorLabel="white" style={{textAlign:'center',marginTop:8}}>{typeMessageT({answer:`${kindOfAnswer}`})}</Texto>
+            </StyledMessages>
+        </ScreenContainer>
+    )
+}
+function typeMessageT({message, answer}) {
+    
+    if(answer){
+        switch (answer) {
+            case '1':
+                return 'Transferencia realizada.'
+            default:
+                return 'Tu Transferencia no se pudo realizada.'
+        }
+    }
+}

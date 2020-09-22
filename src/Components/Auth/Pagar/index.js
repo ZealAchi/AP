@@ -33,7 +33,7 @@ export function PagarHome(props) {
     
         useEffect(() => {
             const unsubscribe = navigation.addListener('focus', () => {
-                StatusBar.setBackgroundColor(Colors.Tertiary);
+                StatusBar.setBackgroundColor(Colors.Primary);
                 // if(props?.route?.params?.top===true){
                     // console.log(scrollRef,'scrollRef')
                     scrollRef.current?.scrollTo({
@@ -50,17 +50,17 @@ export function PagarHome(props) {
        
        
         
-    // StatusBar.setBackgroundColor(Colors.Tertiary)
+    // StatusBar.setBackgroundColor(Colors.Primary)
     const Options = [
-        { label: 'Recibir plata por WhatsApp', icon: <FontAwesome name="whatsapp" color={Colors.Tertiary} size={23} />, onPress: () => navigation.navigate('CobrarQR',{wt:true}) },
-        { label: 'Crear un código QR para recibir plata', icon: <FontAwesome name="qrcode" color={Colors.Tertiary} size={23} />, onPress: () => navigation.navigate('CobrarQR') },
-        { label: 'Escanear código QR para transferir plata', icon: <MaterialCommunityIcons name="qrcode-scan" color={Colors.Tertiary} size={23} />, onPress: () => navigation.navigate('PagarQR') },
-        { label: 'Invita a amigos y gana premios', icon: <Ionicons name="md-person-add" color={Colors.Tertiary} size={23} />, onPress: () => navigation.navigate('InvitaGana') },
-        { label: 'Transferir plata por NFC', icon: <MaterialCommunityIcons name="nfc" color={Colors.Tertiary} size={23} />, onPress: () => {/* navigation.navigate('InvitaGana') */alert('Función no disponible') } },
+        { label: 'Recibir plata por WhatsApp', icon: <FontAwesome name="whatsapp" color={Colors.Primary} size={23} />, onPress: () => navigation.navigate('CobrarQR',{wt:true}) },
+        { label: 'Crear un código QR para recibir plata', icon: <FontAwesome name="qrcode" color={Colors.Primary} size={23} />, onPress: () => navigation.navigate('CobrarQR') },
+        { label: 'Escanear código QR para transferir plata', icon: <MaterialCommunityIcons name="qrcode-scan" color={Colors.Primary} size={23} />, onPress: () => navigation.navigate('PagarQR') },
+        { label: 'Invita a amigos y gana premios', icon: <Ionicons name="md-person-add" color={Colors.Primary} size={23} />, onPress: () => navigation.navigate('InvitaGana') },
+        { label: 'Transferir plata por NFC', icon: <MaterialCommunityIcons name="nfc" color={Colors.Primary} size={23} />, onPress: () => {/* navigation.navigate('InvitaGana') */alert('Función no disponible') } },
     ]
-    return (<ScreenContainer barBackgroundColor={Colors.Tertiary} backgroundColor={Colors.Secondary}>
+    return (<ScreenContainer barBackgroundColor={Colors.Primary} backgroundColor={Colors.Secondary}>
         <ScrollView ref={scrollRef}>
-            <SafeAreaView style={{ backgroundColor: Colors.Tertiary }}>
+            <SafeAreaView style={{ backgroundColor: Colors.Primary }}>
                 <View style={{ display: 'flex', paddingLeft: 12, paddingRight: 12 }}>
                     <Header color={Colors.Secondary} Return Enter={() => <TouchableOpacity onPress={() => navigation.goBack()}>
                         <FontAwesome name="magnet" color={Colors.Secondary} size={23} />
@@ -69,14 +69,14 @@ export function PagarHome(props) {
                     </View>
                     <Texto size={13} colorLabel="white" style={{ textAlign: 'center' }}>¿A quién deseas transferir?</Texto>
                     <View style={{ margin: 8, marginTop: 35 }}>
-                        <TextInput onChangeText={text => search(stateContext.contacts ? stateContext.contacts : [], text, setBuscarContacto)} borderRadius left icon={{ type: '', name: 'search', color: Colors.Tertiary }} style={{ width: 343, height: 38, fontSize: 12, alignItems: 'center', justifyContent: 'center', alignSelf: 'center', backgroundColor: Colors.lavender }} placeholder="Buscar Amigos" />
+                        <TextInput onChangeText={text => search(stateContext.contacts ? stateContext.contacts : [], text, setBuscarContacto)} borderRadius left icon={{ type: '', name: 'search', color: Colors.Primary }} style={{ width: 343, height: 38, fontSize: 12, alignItems: 'center', justifyContent: 'center', alignSelf: 'center', backgroundColor: Colors.lavender }} placeholder="Buscar Amigos" />
                     </View>
                 </View>
                 <View style={{ flex: 1, backgroundColor: Colors.Secondary, marginTop: 30 }}>
                     {Options.map((item) => {
                         return (<TouchableOpacity onPress={() => item.onPress()} style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', height: 51, borderBottomColor: Colors.darkgray, borderBottomWidth: 1 }}>
                             <View style={{ marginLeft: 12, width: 25, alignItems: 'center' }}>{item.icon}</View>
-                            <View style={{ marginLeft: 12 }}><Texto size={14} colorLabel={Colors.Tertiary}>{item.label}</Texto></View>
+                            <View style={{ marginLeft: 12 }}><Texto size={14} colorLabel={Colors.Primary}>{item.label}</Texto></View>
                         </TouchableOpacity>)
                     })}
                     <View style={{ margin: 10, marginBottom: 18 }}>

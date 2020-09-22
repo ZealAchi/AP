@@ -12,12 +12,12 @@ export function HistorialPagos(){
         <Texto size={10} colorLabel={Colors.dimgray}>19:35</Texto>
         </View>
         <View style={{display:'flex',flexDirection:'row',justifyContent:'space-between'}}>
-        <Texto size={12} colorLabel={Colors.Tertiary}>$15.000</Texto>
+        <Texto size={12} colorLabel={Colors.Primary}>$15.000</Texto>
         {/* <Texto Bold size={12} colorLabel={Colors.midnightblue}>RECHAZADO</Texto> */}
         </View>
         </View>
         <Texto size={12} colorLabel={Colors.midnightblue}>El pago de la ultima compra.</Texto>
         </View>
-        <View style={{borderRightColor:Colors.Tertiary,borderRightWidth: 2, flex: 0,left:5,height:'80%'}}/>
+        <View style={{borderRightColor:Colors.Primary,borderRightWidth: 2, flex: 0,left:5,height:'80%'}}/>
     </View>)
 }

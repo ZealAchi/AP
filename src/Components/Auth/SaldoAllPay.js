@@ -42,20 +42,20 @@ export function SaldoAllPay(props) {
         </View>
         <View style={{ height: 65, justifyContent: 'center',display:'flex',flexDirection:'row'}}>
             
-            <ItemBank2 style={{ backgroundColor: 'transparent' }} allpay data={{ img: require('../../Assets/AP.png'), balance: balances?.AllPay?.amount }} />
+            <ItemBank2 nocuenta style={{ backgroundColor: 'transparent' }} allpay data={{ img: require('../../Assets/AP.png'), balance: balances?.AllPay?.amount }} />
             
         </View>
         <View style={{ height: 195, backgroundColor: Colors.Primary, alignItems: 'center'}}>
             <Texto style={{marginTop:12}} size={13} colorLabel="white">¿Cuánto dinero deseas cargar?</Texto>
-            <View style={{ width: 256, height: 80, flex: 1 }}>
+            <View style={{ width: 265, height: 80, flex: 1 }}>
                 <View style={{ borderBottomColor: Colors.lavender, borderBottomWidth: 1, alignItems: 'baseline' }}>
                     <TextInput placeholderTextColor="white" left sizeIcon={35}
                         icon={{ type: 'Foundation', name: 'dollar', color: 'white' }}
                         keyboardType="numeric"
                         maxLength={13}
                         styleText={[monto ? 
-                           { fontSize: 30, right: 12, fontWeight: '700' } : { right: 8, fontSize: dp(0.06) },
-                            // { fontSize: 30, right: 12, fontWeight: '700' } : { fontSize: 22.8, right: 12, fontWeight: '700' },
+                        //    { fontSize: 30, right: 12, fontWeight: '700' } : { right: 8, fontSize: dp(0.06) },
+                            { fontSize: 30, right: 12, fontWeight: '700' } : { fontSize: 22.8, right: 12, fontWeight: '700' },
                         { textAlign: 'center', color: 'white' }]} style={{ backgroundColor: 'transparent' }}
                         value={monto} onChangeText={(e) => setMonto(
                             formatNumber.new(e.replace(/\D/g, '')))

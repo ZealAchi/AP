@@ -7,7 +7,7 @@ const Tab=createMaterialTopTabNavigator();
 
 export function TabsNavigationCardShared(){
     return(
-        <Tab.Navigator>
+        <Tab.Navigator  swipeEnabled={false}>
             <Tab.Screen name="CardShared" component={CardShared} options={{ title: "Tarjetas compartidas" }} />
             <Tab.Screen name="GetCard" component={GetCard} options={{ title: "Conseguir tarjetas" }} />
         </Tab.Navigator>

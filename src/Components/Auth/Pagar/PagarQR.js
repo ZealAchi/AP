@@ -60,9 +60,9 @@ export function PagarQR(props) {
                                 cancel: () => {
                                     setScanned(false)
                                     setState();
+                                    navigation.pop();
                                 },
                                 nextAction: (isTrue) => {
-                                    console.log(isTrue, 'isTrue???')
                                     if (!isTrue) {
                                         navigation.pop()
                                         setTimeout(() => {
@@ -113,7 +113,7 @@ export function PagarQR(props) {
     }, [navigation])
 
     return (
-        <ScreenContainer barBackgroundColor={Colors.Tertiary} backgroundColor={Colors.Tertiary}>
+        <ScreenContainer barBackgroundColor={Colors.Primary} backgroundColor={Colors.Primary}>
             <View style={{ marginTop: 12, paddingLeft: 12, paddingRight: 12 }}>
                 <Header Return color={Colors.Secondary} />
             </View>
@@ -122,7 +122,7 @@ export function PagarQR(props) {
             </View>
             <Block>
                 <View style={{ height: 90, width: '100%', backgroundColor: 'transparent', position: 'absolute', marginTop: -55, alignItems: 'flex-end', zIndex: 1, elevation: 2, justifyContent: 'center', alignItems: 'center' }}>
-                    <ItemBank2 onPress={() => navigation.navigate('MyAccounts', { setSelect: setAccount, type })} allpay style={{ position: 'absolute', marginBottom: -70, zIndex: 99, elevation: 2, width: '95%', height: 75, borderRadius: 12 }} title={'cuentas'} data={{ img: require('../../../Assets/AP.png'), balance: balances?.AllPay?.amount }} />
+                    <ItemBank2 /*onPress={() => navigation.navigate('MyAccounts', { setSelect: setAccount, type })}*/ allpay style={{ position: 'absolute', marginBottom: -70, zIndex: 99, elevation: 2, width: '95%', height: 75, borderRadius: 12 }} title={'cuentas'} data={{ img: require('../../../Assets/AP.png'), balance: balances?.AllPay?.amount }} />
                 </View>
                 <RNCamera googleVisionBarcodeType={RNCamera.Constants.GoogleVisionBarcodeDetection.BarcodeType.DATA_MATRIX} style={{
                     flex: 1,

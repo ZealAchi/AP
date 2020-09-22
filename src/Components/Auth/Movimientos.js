@@ -29,7 +29,7 @@ export function Movements() {
     return (<ScreenContainer barBackgroundColor={Colors.Secondary} backgroundColor={Colors.Secondary} scrollView >
         <View style={{ justifyContent: 'center', alignItems: 'center' }}>
             <View style={{ marginTop: 12, width: '98%', height: 73, display: 'flex', padding: 12, marginBottom: 12 }}>
-                <Header color={Colors.Tertiary} Return />
+                <Header color={Colors.Primary} Return />
                 <Texto Bold size={Colors.midnightblue} size={13}>Movimientos</Texto>
                 <Texto Bold size={Colors.midnightblue} size={13}>
                             

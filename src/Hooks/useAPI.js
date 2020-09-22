@@ -185,7 +185,21 @@ export function useAPI() {
                 // if(data.currency===152){
                 Newbalance = (data.amount / 100)
                 // }
-                setBalancesContext({ AllPay: { ...data, amount: formatNumber.new(Newbalance) } });
+                setBalancesContext({ 
+                  AllPay: { ...data, amount: formatNumber.new(Newbalance) },
+                  Itau:{
+                    amount:"327.658.920",
+                      currency: 152,
+                      updated_at: 1600288710,
+                      uuid: "2f559836-80af-40b9-9ca4-3956022f83b5c",
+                  },
+                  Santander:{
+                    amount:"2.013.867.350",
+                      currency: 152,
+                      updated_at: 1600288710,
+                      uuid: "2f559836-80af-40b9-9ca4-3956022f83bc",
+                  },
+                });
               }
               break;
             default:

@@ -22,6 +22,7 @@ import { DataContext } from '../Context/Datos.Context';
 
 export function Huellero(props) {
     const localStorage = useLocalStorage()
+    console.log(props,'props desde finger')
     const API = useAPI()
     // const { tokenX } = useContext(DataContext)
     const { type, returnValue, noSave,setShowFinger } = props

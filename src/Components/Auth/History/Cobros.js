@@ -22,6 +22,6 @@ export function HistorialCobros() {
         </View>
         <Texto size={12} colorLabel={Colors.midnightblue}>El cobro por el auto.</Texto>
         </View>
-        <View style={{borderRightColor:Colors.Tertiary,borderRightWidth: 2, flex: 0,left:5,height:'80%'}}/>
+        <View style={{borderRightColor:Colors.Primary,borderRightWidth: 2, flex: 0,left:5,height:'80%'}}/>
     </View>)
 }

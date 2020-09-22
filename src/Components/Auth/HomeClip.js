@@ -49,12 +49,12 @@ export function HomeClip({ navigation }) {
     }, [state?.user?.profile?.uuid])
 
     const [imageBanks, setImageBanks] = useState([])
-    
-    const saveKImgBanks = (e,bank) => {
-        setImageBanks([...imageBanks,{ ...bank, source: e}]);
+
+    const saveKImgBanks = (e, bank) => {
+        setImageBanks([...imageBanks, { ...bank, source: e }]);
     }
-    
-    
+
+
 
 
     useEffect(() => {
@@ -92,20 +92,21 @@ export function HomeClip({ navigation }) {
             <ScreenContainer NoMyStatusBar backgroundColor={Colors.Secondary} padding scrollView backgroundColorScrollView="white">
                 <SafeAreaView style={{}}>
                     <Header />
-                    <View style={{ backgroundColor: 'white', display: 'flex', marginBottom: 12, marginTop: -15 }}>
+                    {/* <View style={{ backgroundColor: 'white', display: 'flex', marginBottom: 12, marginTop: -15, borderRadius: 12 }}> */}
+                    <View style={{ width: '98%', marginBottom: 12, backgroundColor:Colors.Secondary, marginBottom: 12, marginTop: -15,  }}>
                         <Carousel data={Carousel1} height={73} />
                     </View>
-                    <View style={{ width: '98%', marginBottom: 12, backgroundColor: 'white' }}>
+                    <View style={{ width: '98%', marginBottom: 12, backgroundColor:Colors.Secondary }}>
                         <Carousel data={Carousel2} height={100} />
                     </View>
 
-                    <View style={{ width: '98%', marginBottom: 12, backgroundColor: 'white' }}>
+                    <View style={{ width: '98%', marginBottom: 12, backgroundColor:Colors.Secondary }}>
                         <Carousel data={Carousel3} height={110} />
                     </View>
-                    <View style={{ width: '98%', display: 'flex', flexDirection: 'row', height: 101, backgroundColor: 'white', marginBottom: 12 }}>
+                    <View style={{ width: '98%', display: 'flex', flexDirection: 'row', height: 101, backgroundColor:Colors.Secondary, marginBottom: 12 }}>
                         <Carousel data={Carousel4} height={101} />
                     </View>
-                    <View style={{ display: 'flex', flex: 0, flexDirection: 'row', marginTop: 8,marginBottom: 8 }}>
+                    <View style={{ display: 'flex', flex: 0, flexDirection: 'row', marginTop: 8, marginBottom: 8 }}>
 
                         <Block style={{ justifyContent: 'center', alignItems: 'center', alignContent: 'center' }}>
                             <Button styleButton={{ borderRadius: 29, width: 151, height: 41 }} size={15} label="Movimientos" onPress={() => {
@@ -153,8 +154,10 @@ const Carousel1 =
         data: (children, height) => {
             // console.log(RootNavigation,'RootNavigation')
             const { balances } = useContext(DataContext)
-            return (<Pressable onPress={() => RootNavigation.navigate('MyAccounts', { withBanlance: true })} style={{ flex: 1 }}>
-                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', flexDirection: 'row', padding: 10, backgrounColor: 'red' }}>
+            return (<Pressable
+                style={{ flex: 1, backgroundColor: 'white', borderRadius: 12 }}
+                onPress={() => { RootNavigation.navigate('SaldoAllPay');/*RootNavigation.navigate('MyAccounts', { withBanlance: true })*/ }}>
+                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', flexDirection: 'row', padding: 10 }}>
                     <Block style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                         <Texto Bold size={12}>Cuenta</Texto>
                         <Ionicons name="ios-arrow-forward" color={Colors.Texto3} size={23} />
@@ -175,7 +178,7 @@ const Carousel1 =
     }, {
         data: (children, height) => {
             return (
-                <Pressable onPress={() => RootNavigation.navigate('SaldoAllPay')} style={{ flex: 1 }}>
+                <Pressable onPress={() => RootNavigation.navigate('SaldoAllPay')} style={{ flex: 1, backgroundColor: 'white', borderRadius: 12 }}>
                     <View style={{ display: 'flex', flex: 1 }}>
                         <View style={{ flex: 1, display: 'flex', flexDirection: 'row' }}>
                             <View style={{ display: 'flex', flex: 1 }}>
@@ -205,37 +208,39 @@ const Carousel1 =
     ]
 
 
-
+// https://www.youtube.com/watch?v=it6c_4Otwoo
 const Carousel2 =
     [{
         data: (children, height) => {
-            return (<View style={{ display: 'flex', flex: 1 }}>
-                <View style={{ flex: 1, display: 'flex', flexDirection: 'row' }}>
-                    <ItemBank2 data={{ nombre: 'Itaú', img: require('../../Assets/HomeItau.png') }} /></View>
-                <View style={{ bottom: 6 }}>
-                    {children && children}
-                </View>
-            </View>)
-        }
-    }, {
-        data: (children, height) => {
-            return (<View style={{ display: 'flex', flex: 1 }}>
-                <View style={{ flex: 1, display: 'flex', flexDirection: 'row' }}>
-                    <ItemBank2 data={{ nombre: 'Santarder', img: require('../../Assets/Santander.png') }} /></View>
-                <View style={{ bottom: 6 }}>
-                    {children && children}
-                </View>
-            </View>)
+            return (
+                <Pressable style={{ flex: 1, backgroundColor: 'white', borderRadius: 12 }}>
+                    <View style={{ flexDirection: 'row', flex: 1, backgroundColor: 'white', justifyConent: "center", alignItems: "center", borderRadius: 12 }}>
+                        <ItemBank2 cuenta style={{ flex: 1, marginTop: 12 }} data={{ nombre: 'Itaú', img: require('../../Assets/HomeItau.png') }} />
+                    </View>
+                    <View style={{ bottom: 6 }}>
+                        {children && children}
+                    </View>
+                </Pressable>)
         }
     }, {
         data: (children, height) => {
             return (
-                <View style={{ display: 'flex', flex: 1, right: 10 }}>
-                    <View style={{ flex: 1, display: 'flex', alignItems: 'center', flexDirection: 'row' }}>
+                <Pressable style={{ flex: 1, backgroundColor: 'white', borderRadius: 12 }}>
+                    <View style={{ flexDirection: 'row', flex: 1, backgroundColor: 'white', justifyConent: "center", alignItems: "center", borderRadius: 12,paddingLeft:12,paddingRight:12}}>
+                            <ItemBank2 cuenta style={{ flex: 1, marginTop: 12 }} data={{ nombre: 'Santander', img: require('../../Assets/Santander.png') }} /></View>
+                        <View style={{ bottom: 6 }}>
+                            {children && children}
+                        </View>
+                </Pressable>)
+        }
+    }, {
+        data: (children, height) => {
+            return (
+                <Pressable style={{ flex: 1, backgroundColor: 'white', borderRadius: 12 }}>
+                    <View style={{ flexDirection: 'row', flex: 1, backgroundColor: 'white', justifyConent: "center", alignItems: "center", borderRadius: 12,paddingLeft:12,paddingRight:12}}>
                         <View style={{ flex: 1, display: 'flex', flexDirection: 'row' }}>
                             <Texto size={12}>Agrega y visualiza aquí cualquier banco.</Texto>
                         </View>
-
                         <View style={{ flex: 1, alignItems: 'center' }}>
                             <Button onPress={() => {
                                 RootNavigation.navigate('AddBank')
@@ -243,10 +248,10 @@ const Carousel2 =
                         </View>
                         <Image style={{ width: 82.29, height: 107.32 }} source={require('../../Assets/CarouselCards2.png')} />
                     </View>
-                    <View style={{ bottom: 6, backgroundColor: 'red', right: 10 }}>
+                    <View style={{ bottom: 6, backgroundColor: 'white', right: 10 }}>
                         {children && children}
                     </View>
-                </View>
+                </Pressable>
             )
         }
     },
@@ -255,9 +260,10 @@ const Carousel2 =
 const Carousel3 =
     [{
         data: (children, height) => {
-            return (<TouchableOpacity style={{ flex: 1, }} onPress={() => {
-                RootNavigation.navigate('Analysis');
-            }}>
+            return (
+                <Pressable style={{ flex: 1, backgroundColor: 'white', borderRadius: 12 }} onPress={() => {
+                    RootNavigation.navigate('Analysis');
+                }}>
                 <View style={{ display: 'flex', flex: 1, height: height ? height : 101, }}>
                     <View style={{ flex: 1, display: 'flex', flexDirection: 'column', paddingLeft: 12, paddingRight: 12 }}>
                         <View style={{ flex: 0.8, display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexDirection: 'row' }}>
@@ -276,7 +282,7 @@ const Carousel3 =
                             </Block>
                             <Block>
                                 <View style={{ marginLeft: 10 }}>
-                                    <Texto colorLabel={Colors.Tertiary} size={12}>Gastos</Texto>
+                                    <Texto colorLabel={Colors.Primary} size={12}>Gastos</Texto>
                                     <Texto colorLabel={Colors.midnightblue} size={12}>$14.555.412</Texto>
                                 </View>
                             </Block>
@@ -285,13 +291,16 @@ const Carousel3 =
                     <View style={{ bottom: 5 }}>
                         {children && children}
                     </View>
-                </View></TouchableOpacity>)
+                </View>
+                </Pressable>
+                )
         }
     }, {
         data: (children, height) => {
-            return (<TouchableOpacity style={{ flex: 1, }} onPress={() => {
-                RootNavigation.navigate('Analysis');
-            }}>
+            return (
+                <Pressable style={{ flex: 1, backgroundColor: 'white', borderRadius: 12 }} onPress={() => {
+                    RootNavigation.navigate('Analysis');
+                }}>
                 <View style={{ display: 'flex', flex: 1, height: height ? height : 101, paddingRight: 12, paddingTop: 6, paddingLeft: 5, paddingRight: 19 }}>
                     <View style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
                         <View style={{ flexDirection: 'row', justifyContent: 'space-between', flex: 0 }}>
@@ -304,18 +313,15 @@ const Carousel3 =
                                 <ProgressCircle
                                     style={{ flex: 1 }}
                                     progress={1}
-                                    progressColor={Colors.Tertiary}
-                                // startAngle={-Math.PI * 0.8}
-                                // endAngle={Math.PI * 0.8}
-                                // children={{data:'hola'}}
+                                    progressColor={Colors.Primary}
                                 >
                                     <View style={{ alignItems: 'center', justifyContent: 'center' }}>
                                         <Texto size={15.2818}>$</Texto>
                                     </View>
                                 </ProgressCircle>
                             </View>
-                            <View  style={{flex:1}}>
-                                <Texto size={12} colorLabel={Colors.Tertiary}>
+                            <View style={{ flex: 1 }}>
+                                <Texto size={12} colorLabel={Colors.Primary}>
                                     145%
                                 </Texto>
                                 <Texto size={12} colorLabel={Colors.darkgray}>
@@ -330,7 +336,7 @@ const Carousel3 =
                     <View style={{ bottom: 5 }}>
                         {children && children}
                     </View>
-                </View></TouchableOpacity>)
+                </View></Pressable>)
         }
     },
     ]
@@ -339,6 +345,7 @@ const Carousel4 =
     [{
         data: (children, height) => {
             return (
+                <Pressable style={{ flex: 1, backgroundColor: 'white', borderRadius: 12,paddingTop:9}}>
                 <View style={{ flex: 1, display: 'flex', flexDirection: 'row', paddingLeft: 12, height: height ? height : 101, }}>
                     <View style={{ flex: 1 }}>
                         <Texto colorLabel={Colors.midnightblue} size={13} Bold>Cotizar tarjeta</Texto>
@@ -346,7 +353,7 @@ const Carousel4 =
                         <Button size={12} styleButton={{ borderRadius: 15, marginTop: 5, width: 111, height: 24 }} label="Ver Tarjetas" onPress={() => {
                             RootNavigation.navigate('NextCard');
                         }} />
-                        <View style={{ flex: 1, marginBottom: 12, top: 12, left: 30 }}>
+                        <View style={{ flex: 1, marginBottom: 12, top: 5, left: 30 }}>
                             {children && children}
                         </View>
                     </View>
@@ -354,11 +361,13 @@ const Carousel4 =
                         <Image source={require('../../Assets/CardHome.png')} style={{ height: 69, width: 82, top: 10 }} />
                     </View>
                 </View>
+                </Pressable>
             )
         }
     }, {
         data: (children, height) => {
             return (
+                <Pressable style={{ flex: 1, backgroundColor: 'white', borderRadius: 12,paddingLeft:9,paddingTop:9}}>
                 <View style={{ flex: 1, display: 'flex', flexDirection: 'row', height: height ? height : 101, }}>
                     <View style={{ flex: 1 }}>
                         <Texto colorLabel={Colors.midnightblue} size={13} Bold>Planes cuenta corriente</Texto>
@@ -366,7 +375,7 @@ const Carousel4 =
                         <Button size={12} styleButton={{ justifyContent: 'center', borderRadius: 15, marginTop: 5, width: 111, height: 24 }} label="Ver planes" onPress={() => {
                             RootNavigation.navigate('NextAccount');
                         }} />
-                        <View style={{ flex: 1, marginBottom: 12, top: 12, left: 30 }}>
+                        <View style={{ flex: 1, marginBottom: 12, top: 5, left: 30 }}>
                             {children && children}
                         </View>
                     </View>
@@ -375,6 +384,7 @@ const Carousel4 =
                     </View>
 
                 </View>
+                </Pressable>
             )
         }
     },
@@ -386,7 +396,7 @@ const styles = StyleSheet.create({
 
     scrollView: {
         //   flex: 1,
-          backgroundColor:Colors.Secondary,
+        backgroundColor: Colors.Secondary,
         //   alignItems: 'center',
         //   justifyContent: 'center',
     },

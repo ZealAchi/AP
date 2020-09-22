@@ -15,7 +15,7 @@ export default function StyledContextProvider({ children }) {
                 color1: Colors.Primary
             },
             secondary: {
-                color1: Colors.Tertiary
+                color1: Colors.Primary
             }
         }
     }

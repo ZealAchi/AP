@@ -26,7 +26,7 @@ export function Analysis() {
         { activo: false, label: 'Dic', ingresos: { value: 50 }, gastos: { value: 8 } },
     ]
     return (<ScreenContainer backgroundColor={Colors.Secondary} padding scrollView>
-        <Header Return color={Colors.Tertiary} />
+        <Header Return color={Colors.Primary} />
         <View style={{ flex: 1 }}>
             <View style={{ display: 'flex', flex: 0, flexDirection: 'row' }}>
                 <View style={{ flex: 1 }}>
@@ -51,7 +51,7 @@ export function Analysis() {
                         <Texto size={12} Bold>$1.455.194</Texto>
                     </View>
                     <View style={{ flex: 1, borderLeftColor: Colors.darkgray, borderLeftWidth: 1,paddingLeft:12 }}>
-                        <Texto size={12} Bold colorLabel={Colors.Tertiary}>Gastos</Texto>
+                        <Texto size={12} Bold colorLabel={Colors.Primary}>Gastos</Texto>
                         <Texto size={12} Bold>$855.194</Texto>
                     </View>
                     <View style={{ flex: 1, borderLeftColor: Colors.darkgray, borderLeftWidth: 1,paddingLeft:12 }}>

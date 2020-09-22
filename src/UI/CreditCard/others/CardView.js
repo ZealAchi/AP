@@ -49,13 +49,14 @@ const s = StyleSheet.create({
   number: {
     fontSize: 21,
     position: "absolute",
-    top: 95,
+    top: 100,
+
     left: 28,
   },
   name: {
     fontSize: 16,
     position: "absolute",
-    bottom: 20,
+    bottom: 15,
     left: 25,
     right: 100,
   },
@@ -65,10 +66,22 @@ const s = StyleSheet.create({
     bottom: 40,
     left: 218,
   },
+  expiryLabel2: {
+    fontSize: 9,
+    position: "absolute",
+    bottom: 54,
+    left: 25,
+  },
   expiry: {
     fontSize: 16,
     position: "absolute",
-    bottom: 20,
+    bottom: 35,
+    left: 25,
+  },
+  expiry2: {
+    fontSize: 16,
+    position: "absolute",
+    bottom: 15,
     left: 220,
   },
   amexCVC: {
@@ -96,7 +109,7 @@ export default class CardView extends Component {
     expiry: PropTypes.string,
     cvc: PropTypes.string,
     placeholder: PropTypes.object,
-    write:PropTypes.any,
+    write: PropTypes.any,
 
     scale: PropTypes.number,
     fontFamily: PropTypes.string,
@@ -113,7 +126,7 @@ export default class CardView extends Component {
       expiry: "••/••",
       cvc: "•••",
     },
-    write:undefined,
+    write: undefined,
     scale: 1,
     fontFamily: Platform.select({ ios: "Courier", android: "monospace" }),
     imageFront: require("../images/card-front.png"),
@@ -125,7 +138,7 @@ export default class CardView extends Component {
     // const asx=useContext(CreditCardContext)
     const { focused,
       brand, name, number, expiry, cvc, customIcons, imgBank,
-      placeholder, imageFront, imageBack, scale, fontFamily ,write} = this.props;
+      placeholder, imageFront, imageBack, scale, fontFamily, write } = this.props;
 
     const Icons = { ...defaultIcons, ...customIcons };
     const isAmex = brand === "american-express";
@@ -138,7 +151,7 @@ export default class CardView extends Component {
         { translateY: ((BASE_SIZE.height * (scale - 1) / 2)) },
       ]
     };
-    console.log(write,'write')
+    console.log(write, 'write')
 
     return (
 
@@ -156,30 +169,37 @@ export default class CardView extends Component {
               source={imgBank} />
             <Image style={[s.icon]}
               source={Icons[brand]} />
-            <Text onPress={() => {write&&this.context.setOnFocus('number') }} style={[s.baseText, { fontFamily }, s.number, !number && s.placeholder, focused === "number" && s.focused]}>
+            <Text onPress={() => { write && this.context.setOnFocus('number') }} style={[s.baseText, { fontFamily }, s.number, !number && s.placeholder, focused === "number" && s.focused]}>
               {!number ? placeholder.number : number}
             </Text>
-            <Text onPress={() => { write&&this.context.setOnFocus('name') }} style={[s.baseText, { fontFamily }, s.name, !name && s.placeholder, focused === "name" && s.focused]}
+            {/*  */}
+            <Text style={[s.baseText, { fontFamily }, s.expiryLabel2, s.placeholder, focused === "expiry" && s.focused]}>
+              VALID THRU
+              </Text>
+            <Text onPress={() => { write && this.context.setOnFocus('expiry') }} style={[s.baseText, { fontFamily }, s.expiry, !expiry && s.placeholder, focused === "expiry" && s.focused]}>
+              {!expiry ? placeholder.expiry : expiry}
+            </Text>
+            {/*  */}
+            <Text onPress={() => { write && this.context.setOnFocus('name') }} style={[s.baseText, { fontFamily }, s.name, !name && s.placeholder, focused === "name" && s.focused]}
               numberOfLines={1}>
               {!name ? placeholder.name : name.toUpperCase()}
             </Text>
-            <Text style={[s.baseText, { fontFamily }, s.expiryLabel, s.placeholder, focused === "expiry" && s.focused]}>
+            {/* <Text style={[s.baseText, { fontFamily }, s.expiryLabel, s.placeholder, focused === "expiry" && s.focused]}>
               Vence hasta
               </Text>
-            <Text onPress={() => { write&&this.context.setOnFocus('expiry') }} style={[s.baseText, { fontFamily }, s.expiry, !expiry && s.placeholder, focused === "expiry" && s.focused]}>
+            <Text onPress={() => { write && this.context.setOnFocus('expiry') }} style={[s.baseText, { fontFamily }, s.expiry, !expiry && s.placeholder, focused === "expiry" && s.focused]}>
               {!expiry ? placeholder.expiry : expiry}
-            </Text>
+            </Text> */}
             {isAmex &&
-              <Text onPress={() => { write&&this.context.setOnFocus('cvc') }} style={[s.baseText, { fontFamily }, s.amexCVC, !cvc && s.placeholder, focused === "cvc" && s.focused]}>
+              <Text onPress={() => { write && this.context.setOnFocus('cvc') }} style={[s.baseText, { fontFamily }, s.amexCVC, !cvc && s.placeholder, focused === "cvc" && s.focused]}>
                 {!cvc ? placeholder.cvc : cvc}
               </Text>}
           </ImageBackground>
           <ImageBackground style={[BASE_SIZE, s.cardFace, transform]}
             source={imageBack}
-            >
+          >
             <View style={{ width: '100%', height: 35, backgroundColor: '#000', position: 'absolute', top: 20 }} />
-            {/* <View style={{ width: '75%', height: 35, backgroundColor: '#fff', position: 'absolute', top: 75, left: '2%' }} /> */}
-            <Text onPress={() => { write&&this.context.setOnFocus('cvc') }} style={[s.baseText, s.cvc, !cvc && s.placeholder, focused === "cvc" && s.focused]}>
+            <Text onPress={() => { write && this.context.setOnFocus('cvc') }} style={[s.baseText, s.cvc, !cvc && s.placeholder, focused === "cvc" && s.focused]}>
               {!cvc ? placeholder.cvc : cvc}
             </Text>
           </ImageBackground>

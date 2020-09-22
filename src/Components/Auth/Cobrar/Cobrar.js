@@ -57,28 +57,9 @@ const user={
                         </View>
                     </View>
             </View>
-            {/* <View style={{ flex: 0.45, display: 'flex', alignItems: 'center' }}>
-                <Texto size={13} colorLabel="white">¿Cuánto  deseas cobrar?</Texto>
-                <View style={{ width: 256, height: 80, flex: 1 }}>
-                    <View style={{ borderBottomColor: Colors.lavender, borderBottomWidth: 1, alignItems: 'baseline' }}>
-                        <TextInput placeholderTextColor="white" left sizeIcon={35}
-                            icon={{ type: 'Foundation', name: 'dollar', color: 'white' }}
-                            keyboardType="numeric"
-                            maxLength={10}
-
-                            styleText={[monto ? { fontSize: 30, right: 12 } : { fontSize: 25 },
-                            { textAlign: 'center', color: 'white' }]} style={{ backgroundColor: 'transparent' }}
-                            value={monto} onChangeText={(e) => setMonto(e.replace(/\D/g, ''))
-                            } placeholder="Ingresa el monto" />
-                    </View>
-                    <View style={{ alignItems: 'center', justifyContent: 'center', flex: 1 }}>
-                        <Texto size={13} colorLabel="white">¿En qué cuenta quieres recibir?</Texto>
-                    </View>
-                </View>
-            </View> */}
             <Block style={{ backgroundColor: Colors.Secondary,height:vh(72)}}>
                 <View style={{ height: 90, width: '100%', backgroundColor: 'transparent', top: -45, alignItems: 'flex-end', zIndex: 1, elevation: 2 }}>
-                    <ItemBank onPress={() => navigation.navigate('MyAccounts', { setSelect: setSelectBank })} style={{ width: '95%' }} title={'cuentas'} data={{ img: require('../../../Assets/Santander.png'), nombre: 'Banco de Chile' }} />
+                    <ItemBank /*onPress={() => navigation.navigate('MyAccounts', { setSelect: setSelectBank })}*/ style={{ width: '95%' }} title={'cuentas'} data={{ img: require('../../../Assets/Santander.png'), nombre: 'Banco de Chile' }} />
                 </View>
                 <View style={{marginTop:-35,height:50}}>
                     <ItemUser height={45} data={user}/>
@@ -102,29 +83,6 @@ const user={
                         if (!monto) AlertMessage({ message: "Debes Ingresar un monto" })
                     }} styleButton={{ width: 218, borderRadius: 18,marginBottom:25 }} label="PAGAR" />
                 </Block>
-                {/* <Block style={{ margin: 18, alignItems: 'center', marginTop: '20%' }}>
-                    <View style={{ display: 'flex', flex: 1, width: '95%' }}>
-                        <TextInput style={{
-                            width: '9%', height: 115.48, textAlignVertical: 'top',
-                            shadowColor: '#000',
-                            shadowOffset: { width: 0, height: 2 },
-                            shadowOpacity: 0.8,
-                            shadowRadius: 2,
-                            elevation: 2,
-                            borderRadius: 12
-                        }} multiline={true} value={message} onChangeText={(e) => setMessage(e)} numberOfLines={10} placeholder="Motivo" />
-                    </View>
-                </Block>
-                <View style={{ display: 'flex', bottom: 12, justifyContent: 'center', alignItems: 'center' }}>
-                    <Button onPress={() => {
-                         AlertMessage({ message: "Función no disponible" })
-                        // if (monto)
-                        //     navigation.navigate('CobrarQR2', {
-                        //         // data: { Amount: monto, ToBID: selectBank, Currency, Message: message }
-                        //     })
-                        // if (!monto) AlertMessage({ message: "Debes Ingresar un monto" })
-                    }} styleButton={{ width: 218, borderRadius: 18 }} label="COBRAR DINERO" />
-                </View> */}
             </Block>
         </ScreenContainer>
     )

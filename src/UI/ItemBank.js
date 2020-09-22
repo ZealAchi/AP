@@ -12,6 +12,8 @@ import * as RootNavigation from '../Navigations/RootNavigation';
 import { dateDiff } from '../Util/CalcularDiasMesAños';
 import { SvgUri } from 'react-native-svg';
 import { useAPI } from '../Hooks/useAPI';
+import { useContext } from 'react';
+import { DataContext } from '../Context/Datos.Context';
 
 const StyledItemBank = styled.TouchableOpacity`
 ${({ nostyle }) => !nostyle ? `
@@ -92,7 +94,9 @@ export const  ItemBank=memo((props)=> {
         <View style={{ flexDirection: 'row', flex: 1, }}>
             <Block flexDirection="row" style={{ alignItems: 'center' }}>
             {data.nombre==='WebPay'?<SvgUri width="40.65px" height="40.65px" uri="https://webpay3gint.transbank.cl/webpayserver/imagenes/webpayplus.svg"/>:
-            <Image style={{ width: 40.65, height: 40.65 }} source={img?data.nombre === 'AllPay'?img:{uri:img}:{uri:imagen}} />
+            <Image style={{ width: 40.65, height: 40.65 }} source={img?(
+                data.nombre === 'AllPay'||data.nombre === 'Santander'||data.nombre === 'Itaú'
+                )?img:{uri:img}:{uri:imagen}} />
             }
                 <View style={{ paddingLeft: 8 }}>
                     <Texto size={12}>{nombre || name}</Texto>
@@ -115,9 +119,10 @@ export const  ItemBank=memo((props)=> {
         </View>
     </StyledItemBank>)
 })
-export function ItemBank2({onlyname,noSaldo, allpay,general, data, title, type, style, onPress = () => { } }) {
+export function ItemBank2({nocuenta,cuenta,onlyname,noSaldo, allpay,general, data, title, type, style, onPress = () => { } }) {
     
-    const { ganancia, img, nombre,balance} = data
+    const {balances}=useContext(DataContext)
+    const { ganancia, img, nombre,balance=nombre==='Itaú'?balances?.Itau?.amount:nombre==='Santander'?balances?.Santander?.amount:undefined} = data
     var date = new Date();
     var hours = date.getHours();
     var minutes = date.getMinutes();
@@ -127,12 +132,13 @@ export function ItemBank2({onlyname,noSaldo, allpay,general, data, title, type, 
     var hoy = `${hours}:${minutes}`;
 
 
+    console.log(type,'type')
     return (
-        <StyledItemBank nostyle style={[{ width: '98%', padding: 10, backgroundColor: 'white', marginBottom: 12 },style]}>
+        <StyledItemBank onPress={onPress} nostyle style={[{ width: '98%', padding: 10, backgroundColor: 'white', marginBottom: 12 },style]}>
             <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', flexDirection: 'row' }}>
-                { !onlyname||allpay && <Block style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                    <Texto Bold size={12}>Cuentas</Texto>
-                    <Ionicons name="ios-arrow-forward" color={Colors.Texto3} size={23} />
+                { (!onlyname||allpay) && <Block style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                    {!nocuenta&&<><Texto Bold size={12}>Cuentas</Texto>
+                    <Ionicons name="ios-arrow-forward" color={Colors.Texto3} size={23} /></>}
                 </Block>}
             </View>
             <View style={{ flex: 5, display: 'flex', flexDirection: 'row', alignItems: 'center' }}>

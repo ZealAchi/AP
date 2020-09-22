@@ -1,27 +1,30 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable no-trailing-spaces */
-import React, { useState, useEffect, useContext } from 'react'
-import { View, Pressable, BackHandler, StatusBar } from 'react-native'
+import React, { useState, useEffect, useContext, useRef } from 'react'
+import { View, TextInput as RNTextInput, BackHandler, Dimensions, StatusBar, KeyboardAvoidingView } from 'react-native'
 import { Texto } from '../../../UI/Texto'
 import { TextInput } from '../../../UI/Input'
 import Colors from '../../../UI/Colors'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
-import { Block } from '../../../UI/Block'
 import { ListBank } from '../../../UI/ListBank'
 import { Button } from '../../../UI/Button'
 import { ItemBank, ItemBank2 } from '../../../UI/ItemBank'
 import { Header } from '../../../UI/Header'
 import { AlertMessage } from '../../Alert'
-import { ItemUser } from '../../../UI/ItemUser'
+// import { ItemUser } from '../../../UI/ItemUser'
 import { DataContext } from '../../../Context/Datos.Context'
 import { useAPI } from '../../../Hooks/useAPI'
 import { formatNumber } from '../../../Util/FormatNumber'
 import { dp } from '../../../UI/dist/Responsive.dev'
-import { vh } from 'react-native-css-vh-vw'
+import { vh, vw } from 'react-native-css-vh-vw'
+import { InputCoordinates } from '../../../UI/InputCoordinates'
+import { ScrollView } from 'react-native-gesture-handler'
+import { LoadingContext } from '../../../Context/Load.Context'
 
 
 export function Pagar(props) {
+    const height = Platform.OS === 'android' ? Dimensions.get('screen').height - StatusBar.currentHeight : Dimensions.get('window').height;
     const API = useAPI()
     const { navigation, route } = props
     const { balances } = useContext(DataContext)
@@ -30,6 +33,7 @@ export function Pagar(props) {
     const [account, setAccount] = useState()
     const Currency = '152'
     const [message, setMessage] = useState('')
+    const [coordenadas,setCoordenadas]=useState()
 
     const { params } = route
     const { type, data, params: paramsP } = params
@@ -40,8 +44,9 @@ export function Pagar(props) {
         earned: '213',
         uuid: data?.uuid
     }
-    const disableNow = () => {setDisabled(false);
-        
+    const disableNow = () => {
+        setDisabled(false);
+
     }
     const payUser = () => {
         try {
@@ -76,8 +81,8 @@ export function Pagar(props) {
                         }, 'payUser')
                     }
                     navigation.push('EnterYourPin', {
-                        type: 'transfer', cancel: () => { disableNow();navigation.pop(); },
-                    pay: (sx) => {console.log('cuack',sx);WalletSend()},
+                        type: 'transfer', cancel: () => { disableNow(); navigation.pop(); },
+                        pay: (sx) => { console.log('cuack', sx); WalletSend() },
                         nextAction: () => { navigation.pop(); return disableNow(); }
                     })
                 }
@@ -91,6 +96,23 @@ export function Pagar(props) {
         });
         return unsubscribe;
     }, [navigation])
+
+    const LoadingCtx = useContext(LoadingContext);
+
+    const fakepay=()=>{
+        if(coordenadas.length===6){
+            LoadingCtx.LoadingIconTrue();
+            setTimeout(()=>{
+                LoadingCtx.LoadingFalse();
+                navigation.reset({
+                    index: 0,
+                    routes: [{ name: 'App' }],
+                });
+                navigation.navigate('MessagesT',{kindOfAnswer:1});
+        
+        },5000)
+    }else {AlertMessage({ message: "Debes ingresar las coordenadas para realizar la transferencia." })}
+    }
 
 
 
@@ -113,61 +135,82 @@ export function Pagar(props) {
         setMonto(paramsP.monto)
         setMessage(paramsP.message)
     }, [paramsP])
-    StatusBar.setBackgroundColor(Colors.Tertiary)
+    StatusBar.setBackgroundColor(Colors.Primary)
 
+    
     return <View style={{ flex: 1, display: 'flex' }}>
-        <View style={{ height: vh(31), backgroundColor: Colors.Tertiary }}>
-            <View style={{ marginTop: 12, paddingLeft: 12, paddingRight: 12, height: dp(0.1) }}>
-                <Header Return color={Colors.Secondary} onPressBack={() => { setMonto(undefined); setMessage(undefined); navigation.pop(); }} />
-            </View>
-            <View style={{ display: 'flex', alignItems: 'center', backgroundColor: Colors.Tertiary, flex: 1 }}>
-                <Texto size={13} colorLabel="white">¿Cuánto quieres transferir?</Texto>
-                <View style={{ width: dp(0.7)/*256*/, height: 85, flex: 1, }}>
-                    <View style={{ borderBottomColor: Colors.lavender, borderBottomWidth: 1, alignItems: 'baseline' }}>
-                        <TextInput placeholderTextColor="white" left sizeIcon={35}
-                            icon={{ type: 'Foundation', name: 'dollar', color: 'white' }}
-                            keyboardType="numeric"
-                            maxLength={13}
-                            styleText={[monto ? { fontSize: 30, right: 12, fontWeight: '700' } : { right: 8, fontSize: dp(0.06) /*25*/ },
-                            { textAlign: 'center', color: 'white', }]} style={{ backgroundColor: 'transparent' }}
-                            value={monto} onChangeText={(e) => setMonto(
-                                formatNumber.new(e.replace(/\D/g, '')))
-                            } placeholder="Ingresa el monto" />
+                <View style={{ height: vh(31), backgroundColor: Colors.Primary }}>
+                    <View style={{ marginTop: 12, paddingLeft: 12, paddingRight: 12, height: dp(0.1) }}>
+                        <Header Return color={Colors.Secondary} onPressBack={() => { setMonto(undefined); setMessage(undefined); navigation.pop(); }} />
                     </View>
-                    <View style={{ alignItems: 'center', justifyContent: 'center', flex: 1, marginBottom: 45 }}>
-                        <Texto size={13} colorLabel="white">¿Desde qué cuenta deseas transferir?</Texto>
+                    <View style={{ display: 'flex', alignItems: 'center', backgroundColor: Colors.Primary, flex: 1 }}>
+                        <Texto size={13} colorLabel="white">¿Cuánto quieres transferir?</Texto>
+                        <View style={{ width: dp(0.7)/*256*/, height: 85, flex: 1, }}>
+                            <View style={{ borderBottomColor: Colors.lavender, borderBottomWidth: 1, alignItems: 'baseline' }}>
+                                <TextInput placeholderTextColor="white" left sizeIcon={35}
+                                    icon={{ type: 'Foundation', name: 'dollar', color: 'white' }}
+                                    keyboardType="numeric"
+                                    maxLength={13}
+                                    styleText={[monto ? { fontSize: 30, right: 12, fontWeight: '700' } : { right: 8, fontSize: dp(0.06) /*25*/ },
+                                    { textAlign: 'center', color: 'white', }]} style={{ backgroundColor: 'transparent' }}
+                                    value={monto} onChangeText={(e) => setMonto(
+                                        formatNumber.new(e.replace(/\D/g, '')))
+                                    } placeholder="Ingresa el monto" />
+                            </View>
+                            <View style={{ alignItems: 'center', justifyContent: 'center', flex: 1, marginBottom: 45 }}>
+                                <Texto size={13} colorLabel="white">¿Desde qué cuenta deseas transferir?</Texto>
+                            </View>
+                        </View>
+                    </View>
+                    <View style={{ position: 'absolute', height: 90, width: '100%', backgroundColor: 'transparent', bottom: -45, alignItems: 'flex-end', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                        <ItemBank2 onPress={() => navigation.navigate('MyAccounts', { setSelect: setAccount, type })} allpay style={{ zIndex: 1, elevation: 2, width: '95%', height: 75, borderRadius: 12 }} title={'cuentas'}
+                         data={{ img:account===0?require('../../../Assets/AP.png'):
+                         account===1?require('../../../Assets/logos/Santanderx.png'):
+                         account===2?require('../../../Assets/logos/BancoItau.jpg')
+                         :require('../../../Assets/AP.png'), balance:
+                         account===0?balances?.AllPay?.amount:
+                         account===1?balances?.Santander?.amount:
+                         account===2?balances?.Itau?.amount
+                         :balances?.AllPay?.amount
+                          }} />
+                    </View>
+
+                </View>
+
+                <View style={{ flex: 1, backgroundColor: Colors.Secondary, flexDirection: 'column-reverse', zIndex: -12, alignItems: 'center' }}>
+                    <View style={{ flex: 1,flexDirection: 'column-reverse',alignItems:'center' }}>
+                        <Button disabled={disabled} onPress={() => {
+                            if (monto) {
+                                setDisabled(true)
+                                //
+                                account===0? payUser():
+                         account===1?fakepay():
+                         account===2?fakepay()
+                         :payUser()
+                            }
+                            if (!monto) AlertMessage({ message: "Debes Ingresar un monto" })
+                        }} styleButton={{ width: vh(30), borderRadius: 18, marginBottom: 10, }} label="TRANSFERIR" />
+                        {(!account===2||!account===1)&&<View style={{ alignItems: 'center' }}>
+                            <TextInput style={{
+                                width: '9%', height: 115.48, textAlignVertical: 'top',
+                                marginLeft: 28,
+                                paddingLeft: 12,
+                                paddingRight: 12,
+                                marginRight: 28,
+                                marginBottom: 18,
+                                shadowColor: '#000',
+                                shadowOffset: { width: 0, height: 2 },
+                                shadowOpacity: 0.8,
+                                shadowRadius: 2,
+                                elevation: 2,
+                                borderRadius: 12
+                            }} multiline={true} value={message} onChangeText={(e) => setMessage(e)} numberOfLines={10} placeholder="Motivo" />
+                        </View>}
+                        {(account===1||account===2)&&(<View style={{flex:1,justifyContent:'center',alignItems:'center'}}>
+                        <InputCoordinates setCoordenadas={setCoordenadas} />
+                        </View>)}
                     </View>
                 </View>
-            </View>
-            <View style={{ position: 'absolute', height: 90, width: '100%', backgroundColor: 'transparent', bottom: -45, alignItems: 'flex-end', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                <ItemBank2 onPress={() => navigation.navigate('MyAccounts', { setSelect: setAccount, type })} allpay style={{ zIndex: 1, elevation: 2, width: '95%', height: 75, borderRadius: 12 }} title={'cuentas'} data={{ img: require('../../../Assets/AP.png'), balance: balances?.AllPay?.amount }} />
-            </View>
-
-        </View>
-
-        <View style={{ flex: 1, backgroundColor: Colors.Secondary, flexDirection: 'column-reverse', zIndex: -12, alignItems: 'center' }}>
-            <Button disabled={disabled} onPress={() => {
-                if (monto) {
-                    setDisabled(true)
-                    payUser()
-                }
-                if (!monto) AlertMessage({ message: "Debes Ingresar un monto" })
-            }} styleButton={{ width: vh(30), borderRadius: 18, marginBottom: 10, }} label="TRANSFERIR" />
-            <TextInput style={{
-                width: '9%', height: 115.48, textAlignVertical: 'top',
-                marginLeft: 28,
-                paddingLeft: 12,
-                paddingRight: 12,
-                marginRight: 28,
-                marginBottom: 18,
-                shadowColor: '#000',
-                shadowOffset: { width: 0, height: 2 },
-                shadowOpacity: 0.8,
-                shadowRadius: 2,
-                elevation: 2,
-                borderRadius: 12
-            }} multiline={true} value={message} onChangeText={(e) => setMessage(e)} numberOfLines={10} placeholder="Motivo" />
-        </View>
     </View>
 
 }

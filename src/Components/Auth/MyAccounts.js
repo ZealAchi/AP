@@ -29,17 +29,19 @@ export function MyAccounts(props) {
         params?.setSelect&&params?.setSelect(selectBank);
     }, [selectBank]);
     const amount=route?.params?.monto;
-    const withBanlance=route?.params?.withBanlance;
+    // const withBanlance=route?.params?.withBanlance;
     return (
         <ScreenContainer backgroundColor={Colors.Secondary} >
             <View style={{ display: 'flex', paddingLeft: 12, paddingRight: 12 }}>
                 <Header Return />
             </View>
-            <View style={{ paddingLeft: 12, paddingRight: 12 }}>
+            <View style={{ paddingLeft: 12, paddingRight: 12,paddingBottom:4, borderBottomWidth: .5, borderBottomColor: Colors.darkgray}}>
                 <Texto size={13}>Mis Cuentas</Texto>
             </View>
-            <ListBank setSelect={params && setSelectBank} withBanlance={withBanlance} amount={amount} data={ListBanks} nostyle type={params?.type?params?.type:'MyAccounts'}
-            styleItem={{ paddingLeft: 12, paddingRight: 12, height: 60, backgroundColor: 'transparent', justifyContent: 'center', borderTopWidth: .7, borderTopColor: Colors.darkgray, borderBottomWidth: .5, borderBottomColor: Colors.darkgray }}/>
+            <ListBank setSelect={params && setSelectBank} withBanlance amount={amount} data={ListBanks} nostyle type={params?.type?params?.type:'MyAccounts'}
+            styleItem={{ paddingLeft: 12, paddingRight: 12, height: 60,
+            backgroundColor: 'transparent', justifyContent: 'center',
+            borderBottomWidth: .5, borderBottomColor: Colors.darkgray }}/>
             <View style={{ style: 'flex', alignItems: 'center', margin: 12 }}>
                 <Button size={15} onPress={() => { navigation.navigate('AddBank') }} styleButton={{ bottom: 0, borderRadius: 18, width: 218 }} label="AÑADIR BANCOS" />
             </View>

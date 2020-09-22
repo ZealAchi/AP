@@ -9,7 +9,7 @@ const Tab = createMaterialTopTabNavigator();
 
 export function TabsNavigationWallet() {
   return (
-    <Tab.Navigator >
+    <Tab.Navigator  swipeEnabled={false}>
       <Tab.Screen name="MisTarjetas" component={MisTarjetas} options={{ title: "Mis Tarjetas" }} />
       <Tab.Screen name="CompartidasConmigo" component={CompartidasConmigo} options={{ title: "Compartidas conmigo" }} />
     </Tab.Navigator>

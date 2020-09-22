@@ -13,25 +13,31 @@ import { ItemUser } from './ItemUser';
 import { ContactsContext } from '../Context/Contacts.Context';
 import { useAPI } from '../Hooks/useAPI';
 import { DataContext } from '../Context/Datos.Context';
+import Colors from './Colors';
 export const ContactsM = memo(({ params, home, type, searchContact = [] }) => {
-  const { state: stateContext = [], setState: setStateContext } = useContext(ContactsContext)
+  const { state: stateContext = [], setState: setStateContext,contactsM, setContactsM } = useContext(ContactsContext)
   const Context = useContext(DataContext)
   const [phoneNumbers, setPhoneNumbers] = useState()
+
+  const [loading, setLoading] = useState(false);
   const [state, setState] = useState({
-    contacts: [],
-    loading: true
+    contacts: []
   })
   useEffect(() => {
-    if (state.loading === false && state.contacts.length > 0) {
+    if (loading === false && state.contacts.length > 0) {
       setStateContext(state)
     }
-  }, [state.loading])
+  }, [loading])
 
 
   const API = useAPI();
 
   function setContacts(contacts, state) {
-    setState({ ...state, contacts, loading: state })
+    setState({ ...state, contacts })
+    setTimeout(() => {
+      setLoading(state)  
+    }, 500);
+    
   }
 
   useEffect(() => {
@@ -48,7 +54,7 @@ export const ContactsM = memo(({ params, home, type, searchContact = [] }) => {
         ).then(async () => {
           await Contacts.getAll((err, contacts) => {
             if (err === 'denied') {
-              alert('')
+              // alert('')
             } else {
               // contacts
               let phone_contacts = []
@@ -95,13 +101,13 @@ export const ContactsM = memo(({ params, home, type, searchContact = [] }) => {
     const data = { ...item, name: item.displayName ? item.displayName : `${item.first_name}${item.last_name}`, match: item.match ? item.match : item.displayName ? false : true, type: 'Contact' }
     return (
       <Pressable onPress={() => {
-        if (data.uuid){
+        if (data.uuid) {
           type && RootNavigation.navigate(type, {
             data: data,
             type: type,
             params: params
           })
-        }else alert('Este usuario no tiene cuenta deseas invitarlo')
+        } else alert('Este usuario no tiene cuenta deseas invitarlo')
       }}>
         <View style={{ height: 48.75, backgroundColor: 'transparent', minHeight: 0 }}>
           <ItemUser data={data} Enter />
@@ -139,9 +145,9 @@ export const ContactsM = memo(({ params, home, type, searchContact = [] }) => {
       else r[1].push({ ...o, match: false })
       return r
     }, [[], []])
-
-    const AllContacts = unmatchingPhones.concat(matchingPhones)
-    setContacts(AllContacts, false)
+    setContactsM(matchingPhones)
+    // const AllContacts = unmatchingPhones.concat(matchingPhones)
+    setContacts(unmatchingPhones, false)
   }
 
 
@@ -156,7 +162,7 @@ export const ContactsM = memo(({ params, home, type, searchContact = [] }) => {
   }, [Context.contactsMatch])
   return (<View style={{ flex: 1 }}>
     {
-      state.loading === true ?
+      loading === true ?
         (
           <View style={{
             flex: 1,
@@ -167,20 +173,11 @@ export const ContactsM = memo(({ params, home, type, searchContact = [] }) => {
             <ActivityIndicator size="large" color="#0000ff" />
           </View>
         ) :
-        stateContext?.contacts && stateContext.contacts && <SectionListContacts
-          sectionListData={
-            home ?
-              searchContact.length > 0 ? searchContact :
-                Context.contactsMatch
-              // console.log(Context.contactsMatch,'Context.contactsMatch')
-              :
-              searchContact.length > 0 ? searchContact : stateContext.contacts}
-          initialNumToRender={
-            home ?
-              // searchContact.length > 0? searchContact:
-              Context.contactsMatch.length
-              :
-              searchContact.length > 0 ? searchContact.length : stateContext.contacts.length}
+        stateContext?.contacts && stateContext.contacts && <React.Fragment>
+          <Texto style={{ fontWeight: '300', lineHeight: 70, letterSpacing: 0.828029 }} typeFamily="latoLightItalic" colorLabel={Colors.midnightblue} size={20}>ALL<Texto colorLabel={Colors.midnightblue} style={{ fontWeight: '900', letterSpacing: 0.828029 }} Bold size={20}>PAY</Texto></Texto>
+          <SectionListContacts
+          sectionListData={contactsM}
+          initialNumToRender={contactsM.length}
           otherAlphabet="#"
           showAlphabet={false}
           renderHeader={_renderHeader}
@@ -188,6 +185,28 @@ export const ContactsM = memo(({ params, home, type, searchContact = [] }) => {
           SectionListClickCallback={(item, index) => {
             console.log('---SectionListClickCallback--:', item, index)
           }}
-        />}
+        />
+        <Texto colorLabel={Colors.midnightblue} style={{ letterSpacing: 0.828029 }}>Contactos</Texto>
+          <SectionListContacts
+            sectionListData={
+              home ?
+                searchContact.length > 0 ? searchContact :
+                  Context.contactsMatch
+                :
+                searchContact.length > 0 ? searchContact : stateContext.contacts}
+            initialNumToRender={
+              home ?
+                Context.contactsMatch.length
+                :
+                searchContact.length > 0 ? searchContact.length : stateContext.contacts.length}
+            otherAlphabet="#"
+            showAlphabet={false}
+            renderHeader={_renderHeader}
+            renderItem={_renderItem}
+            SectionListClickCallback={(item, index) => {
+              console.log('---SectionListClickCallback--:', item, index)
+            }}
+          />
+        </React.Fragment>}
   </View>)
 })
