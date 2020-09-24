@@ -54,7 +54,9 @@ export function NextAccount() {
             {ItemsNexAccount.map((item, i) => {
                 return (
                     <View key={item.Marca} style={{
-                        marginTop: 18, height: 130.91, width: 343, backgroundColor: 'white', padding: 8, display: 'flex', elevation: 2, borderRadius: 12,
+                        marginTop:18,
+                        paddingTop:12,paddingBottom:12, height: 133.91, width: 343, padding: 8, display: 'flex', elevation: 2,
+                         borderRadius: 5,
                         shadowColor: "#000",
                         shadowOffset: {
                             width: 0,
@@ -62,10 +64,10 @@ export function NextAccount() {
                         },
                         shadowOpacity: 0.30,
                         shadowRadius: 4.65,
-
                         elevation: 8,
+                        backgroundColor:"white"
                     }}>
-                        <View style={{ flex: 1, flexDirection: 'row' }}>
+                        <View style={{ flex: 2.8, flexDirection: 'row',justifyContent:"center" }}>
                             <View style={{ flex: 1 }}>
                                 <Texto size={12} Bold>Plan Cuenta Corriente {item.PlanCuentaCorriente}</Texto>
                                 <Texto Bold size={12}>Renta mínima: <Texto size={12}>${item.RentaMinima}</Texto></Texto>
@@ -78,11 +80,12 @@ export function NextAccount() {
                                 </View>
                             </View>
                         </View>
-                        <View style={{ flexDirection: 'row', flex: 0, justifyContent: 'space-between' }}>
-                            <View>
+                        <View style={{ flexDirection: 'row', flex:1, alignItems:"flex-end",marginBottom:0,alignItems:"center"}}>
+                            <View style={{flex:1}}>
                                 <Texto size={12} colorLabel={Colors.dimgray}>Comisión mensual</Texto>
                                 <Texto Bold size={12}>{item.CostoMensual}</Texto>
                             </View>
+                            <View style={{flex:0,justifyContent:'center',alignItems:'center',}}>
                             <Button onPress={async()=>{
                                 console.log(item.link)
                                  const supported = await Linking.canOpenURL(item.link);
@@ -95,6 +98,7 @@ export function NextAccount() {
                                    Alert.alert(`Don't know how to open this URL: ${item.link}`);
                                  }
                             }} label="Solicitar" styleButton={{ height: 24.91, width: 89, borderRadius: 50 }} />
+                            </View>
                         </View>
                     </View>
                 )

@@ -24,7 +24,7 @@ const ItemsNexCard = [
         link: "http://t.ly/Y1bP",
     },
     {
-        img: require("../../Assets/logos/BancoChile.jpg"),
+        img: require("../../Assets/logos/BancoEstado.png"),
         imgBanner: require("../../Assets/Cards/Mastercard_Dorada_para_banner.png"),
         imgCard: require("../../Assets/Cards/Mastercard_Dorada.png"),
         label: "Banco Estado Mastercard Gold",
@@ -50,7 +50,7 @@ const ItemsNexCard = [
     }, {
         img: require("../../Assets/logos/Santanderx.png"),
         imgBanner: require("../../Assets/Cards/Mastercard_Black_para_banner.png"),
-        imgCard: require("../../Assets/Cards/Visa_Signature.png"),
+        imgCard: require("../../Assets/Cards/Mastercard_Black.png"),
         label: "Santander WorldMember LATAM Pass Mastercard",
         type: "MC",
         typeColor: 'Negro',
@@ -66,13 +66,12 @@ export function NextCard() {
         <ScreenContainer backgroundColor={Colors.Secondary} padding scrollView>
             <Header Return />
             <Texto colorLabel={Colors.midnightblue} size={13} Bold>Elige tu próxima Tarjeta de Crédito</Texto>
-            <Block style={{ alignItems: 'center', borderTopWidth: 1, borderTopColor: Colors.lavender, paddingTop: 10, marginTop: 12 }}>
-
+            <Block style={{ alignItems: 'center', borderTopWidth: 1, borderTopColor: Colors.lavender, paddingTop: 10, marginTop: 12 ,backgroundColor: 'transparent'}}>
                 {ItemsNexCard.map((item, i) => {
                     return <>
-                        <View style={{ width: 320, height: 88, display: 'flex', flex: 1, borderRadius: 25, elevation: 1, marginLeft: 7, marginRight: 7 }} >
-                            <View style={{ position: 'absolute', flex: 1, height: 10 }}>
-                                <Image source={item.imgBanner} resizeMode={"stretch"} borderRadius={7} style={{
+                        <View style={{ width: 320, height: 88, display: 'flex', flex: 1,  marginLeft: 7, marginRight: 7,borderWidth:0, backgroundColor:'transparent'}} >
+                            <View style={{ position: 'absolute', flex: 1, height: 10,backgroundColor:'transparent'}}>
+                                <Image source={item.imgBanner} resizeMode={"stretch"}  style={{
                                     flex: 1,
                                     position: 'absolute',
                                     transform: [{ scale: 0.88, }],
@@ -82,8 +81,8 @@ export function NextCard() {
                                     transform: [{ translateY: 22 }]
                                 }} />
                             </View>
-                            <View style={{ flex: 0, flexDirection: 'row', justifyContent: 'space-between', }}>
-                                <View style={{ width: 243, height: 43, alignItems: 'center', flexDirection: 'row' }}>
+                            <View style={{ flex: 0, flexDirection: 'row', justifyContent: 'space-between' }}>
+                                <View style={{ width: 243, height: 43, alignItems: 'center', flexDirection: 'row',backgroundColor:'transparent' }}>
                                     <Image source={item.type === "MC" ? require("../../Assets/logos/mc.png") : require("../../Assets/logos/Visa.png")} resizeMode="contain" style={{ height: 35, width: 35, marginLeft: 12 }} />
                                     <Texto colorLabel={item.typeColor === "Plata" ? "#13171b" : "white"} size={16} style={{ marginLeft: 5, fontFamily: "Montserrat" }}>{
                                         item.typeColor === "Gold" ?
@@ -97,7 +96,7 @@ export function NextCard() {
                                 <View style={{ width: 43, height: 43 }}>
                                     <Image source={item.img} borderRadius={25} style={{
                                         height: 45,
-                                        width: 30
+                                        width: 30,
                                     }} resizeMode="contain" />
                                 </View>
                             </View>
@@ -130,8 +129,8 @@ export function NextCard() {
                                     }} />
                                 </View>
                             </View>
-                            <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', }}>
-                                <View style={{ marginTop: 12 }}>
+                            <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems:'center',alignContent:'center'}}>
+                                <View style={{top:-1}}>
                                     <Texto size={10} colorLabel={Colors.darkgray}>Renta mínima</Texto>
                                     <Texto Bold size={12} colorLabel={Colors.midnightblue}>{item.rentaMinima}</Texto>
                                 </View>

@@ -33,7 +33,7 @@ const user={
 
 
     return (
-        <ScreenContainer barBackgroundColor={Colors.Primary} backgroundColor={Colors.Primary} scrollView>
+        <ScreenContainer barBackgroundColor={Colors.Tertiary} backgroundColor={Colors.Primary} scrollView>
             <View style={{ marginTop: 12, paddingLeft: 12, paddingRight: 12 }}>
                 <Header Return color={Colors.Secondary} />
             </View>

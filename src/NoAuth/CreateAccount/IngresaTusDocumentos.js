@@ -72,7 +72,7 @@ export function IngresaTusDocumentos({ navigation }) {
             </View>
             <View>
                 <Texto size={12}>RUT</Texto>
-                <TextInput autoCompleteType={'off'} autoCorrect={false} borderBottomWidth backgroundColor={'transparent'} value={formateaRut(rut_number)} onChangeText={(e) =>{ 
+                <TextInput keyboardType="visible-password" borderBottomWidth backgroundColor={'transparent'} value={formateaRut(rut_number)} onChangeText={(e) =>{ 
                     setRut_number(e)
                     }} placeholder="Ingresa tu RUT"/>
             </View>

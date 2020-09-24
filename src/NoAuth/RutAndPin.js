@@ -46,7 +46,7 @@ export function RutAndPin({navigation}) {
 
             <View style={{ width: vw(72) }}>
                 <Texto>Ingresa tu Rut</Texto>
-                <TextInput autoCompleteType={'off'} autoCorrect={false} borderBottomWidth backgroundColor={'transparent'} value={rut_number} onChangeText={(e) =>
+                <TextInput keyboardType="visible-password" borderBottomWidth backgroundColor={'transparent'} value={rut_number} onChangeText={(e) =>
                 {
                     const newRut =format(e)
                     setRut_number(newRut)

@@ -36,7 +36,7 @@ export const ContactsM = memo(({ params, home, type, searchContact = [] }) => {
     setState({ ...state, contacts })
     setTimeout(() => {
       setLoading(state)  
-    }, 500);
+    }, 100);
     
   }
 
@@ -75,7 +75,7 @@ export const ContactsM = memo(({ params, home, type, searchContact = [] }) => {
                   })
                 }
               }
-              API.PostAPI.checkContacts({ phone_contacts: phone_contacts })
+                API.PostAPI.checkContacts({ phone_contacts: phone_contacts })  
               setContacts(contacts, true)
             }
           })
@@ -145,7 +145,11 @@ export const ContactsM = memo(({ params, home, type, searchContact = [] }) => {
       else r[1].push({ ...o, match: false })
       return r
     }, [[], []])
-    setContactsM(matchingPhones)
+    console.log(matchingPhones,'matchingPhones')
+    if(JSON.stringify(matchingPhones)!=="[]"){
+      setContactsM(matchingPhones)
+    }
+    
     // const AllContacts = unmatchingPhones.concat(matchingPhones)
     setContacts(unmatchingPhones, false)
   }

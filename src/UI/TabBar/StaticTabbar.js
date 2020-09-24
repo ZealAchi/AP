@@ -104,7 +104,7 @@ export default function StaticTabbar(props) {
                                     {tab.name === 'Transferir' &&
                                         <Pressable
                                             onPress={() => {
-                                                navigation.navigate('PagarHome',{top:true})
+                                                navigation.navigate('PagarHome', {top:true, monto: undefined, message: undefined, account:undefined})
                                             }}
                                         ><Image source={require('./icons/Pagar.png')} style={{ height: 30, width: 32 }} /></Pressable>}
                                     {tab.name === 'Mis Bancos' &&

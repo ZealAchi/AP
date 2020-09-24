@@ -131,8 +131,6 @@ export function ItemBank2({nocuenta,cuenta,onlyname,noSaldo, allpay,general, dat
     if(minutes<10){minutes='0'+minutes}
     var hoy = `${hours}:${minutes}`;
 
-
-    console.log(type,'type')
     return (
         <StyledItemBank onPress={onPress} nostyle style={[{ width: '98%', padding: 10, backgroundColor: 'white', marginBottom: 12 },style]}>
             <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', flexDirection: 'row' }}>
@@ -150,9 +148,9 @@ export function ItemBank2({nocuenta,cuenta,onlyname,noSaldo, allpay,general, dat
                             Saldo All<Texto Bold size={12} colorLabel={Colors.midnightblue}>Pay</Texto></Texto>}</Texto>
                     </Block>
                 :<Block style={{ marginLeft: 8 }}>
-                <Texto size={12} colorLabel={Colors.midnightblue}>{!allpay ? nombre?nombre:'Itaú' : <Texto Texto size={12} colorLabel={Colors.midnightblue}>
-                    Saldo All<Texto Bold size={12} colorLabel={Colors.midnightblue}>Pay</Texto></Texto>}</Texto>
-                <Texto size={12} colorLabel={Colors.dimgray}>Hoy, {hoy}</Texto>
+                <Texto size={12} colorLabel={Colors.midnightblue}>{(!allpay) ? data.nombre?nombre:'Itaú' : <Texto Texto size={12} colorLabel={Colors.midnightblue}>
+                    Saldo {nombre==='Santander'?"Santander":nombre==='Itaú'?"Itaú":<Texto Bold size={12} colorLabel={Colors.midnightblue}>Pay</Texto>} </Texto>}</Texto>
+    <Texto size={12} colorLabel={Colors.dimgray}>Hoy, {hoy}</Texto>
             </Block>
                 }
                 </Block>

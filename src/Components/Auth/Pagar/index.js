@@ -18,7 +18,6 @@ import { Header } from '../../../UI/Header'
 import { search } from '../../../UI/contacts/searchContact'
 import { ContactsContext } from '../../../Context/Contacts.Context'
 
-import { useScrollToTop } from '@react-navigation/native';
 import { DataContext } from '../../../Context/Datos.Context'
 
 export function PagarHome(props) {
@@ -30,6 +29,7 @@ export function PagarHome(props) {
     const [buscarContacto, setBuscarContacto] = useState([])
 
     const { navigation } = props
+    
     
         useEffect(() => {
             const unsubscribe = navigation.addListener('focus', () => {
@@ -49,7 +49,8 @@ export function PagarHome(props) {
 
        
        
-        
+    
+    // console.log(props?.route?.params,'props?.route?.params')
     // StatusBar.setBackgroundColor(Colors.Primary)
     const Options = [
         { label: 'Recibir plata por WhatsApp', icon: <FontAwesome name="whatsapp" color={Colors.Primary} size={23} />, onPress: () => navigation.navigate('CobrarQR',{wt:true}) },

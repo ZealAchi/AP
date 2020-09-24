@@ -84,6 +84,7 @@ export function useAPI() {
                 setStateContext({
                   ...state,
                   user: { token: data.token, decodeUser: decoded(data.token) },
+                  usuarioRUT:Data.rut_number
                 });
                 const uploadImg = state.NewUser[0].uploadImg;
                 const decodeUser = decoded(data.token);
@@ -109,6 +110,7 @@ export function useAPI() {
                 setStateContext({
                   ...state,
                   user: { token: data.token, decodeUser: decoded(data.token) },
+                  usuarioRUT:Data.rut_number
                 });
                 nextAction(true);
               } else {

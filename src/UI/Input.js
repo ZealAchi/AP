@@ -14,7 +14,7 @@ border-bottom-width:${({borderBottomWidth})=>borderBottomWidth?'1px':'0px'};
 
 export function TextInput(props) {
     const { autoCorrect,secureTextEntry,autoCapitalize,placeholderTextColor,borderBottomWidth,borderRadius,borderBottomColor,backgroundColor, autoCompleteType, numberOfLines, note, sizeIcon, disable = false, placeholder, style, textContentType, keyboardType, value, onChangeText, multiline, icon, left, right = false, styleText, maxLength} = props
-    return (<View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
+    return (<View  style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
         {icon && <Type icon={icon} left={left} right={right} sizeIcon={sizeIcon} />}
         <StyledTextInput 
         autoCapitalize={autoCapitalize?autoCapitalize:'sentences'}

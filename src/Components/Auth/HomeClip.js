@@ -345,7 +345,7 @@ const Carousel4 =
     [{
         data: (children, height) => {
             return (
-                <Pressable style={{ flex: 1, backgroundColor: 'white', borderRadius: 12,paddingTop:9}}>
+                <Pressable onPress={()=>RootNavigation.navigate('NextCard')} style={{ flex: 1, backgroundColor: 'white', borderRadius: 12,paddingTop:9}}>
                 <View style={{ flex: 1, display: 'flex', flexDirection: 'row', paddingLeft: 12, height: height ? height : 101, }}>
                     <View style={{ flex: 1 }}>
                         <Texto colorLabel={Colors.midnightblue} size={13} Bold>Cotizar tarjeta</Texto>
@@ -367,7 +367,7 @@ const Carousel4 =
     }, {
         data: (children, height) => {
             return (
-                <Pressable style={{ flex: 1, backgroundColor: 'white', borderRadius: 12,paddingLeft:9,paddingTop:9}}>
+                <Pressable onPress={()=>RootNavigation.navigate('NextAccount')} style={{ flex: 1, backgroundColor: 'white', borderRadius: 12,paddingLeft:9,paddingTop:9}}>
                 <View style={{ flex: 1, display: 'flex', flexDirection: 'row', height: height ? height : 101, }}>
                     <View style={{ flex: 1 }}>
                         <Texto colorLabel={Colors.midnightblue} size={13} Bold>Planes cuenta corriente</Texto>

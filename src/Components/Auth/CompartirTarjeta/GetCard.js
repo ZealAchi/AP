@@ -69,11 +69,10 @@ export function GetCard() {
             <TextInput borderRadius left icon={{ type: '', name: 'search' }} style={{ width: 343, height: 38, fontSize: 12, alignItems: 'center', justifyContent: 'center', alignSelf: 'center', backgroundColor: Colors.lavender }} placeholder="Buscar Tarjetas" />
             <View style={{ justifyContent:'center',alignItems:'center'}}>
                     <View style={{ width: 335, height: 110, display: 'flex' }} >
-                        <View style={{ position: 'absolute', flex: 1, height: 90 }}>
-                            <Image source={item.imgBanner} resizeMode={"stretch"} borderRadius={7} style={{
+                        <View style={{ position: 'absolute', flex: 1, height: 95 }}>
+                            <Image source={item.imgBanner} resizeMode={"stretch"} style={{
                                 flex: 1,
                                 position: 'absolute',
-                                
                                 top: 7,
                                 left:7.5,
                                 height: 118,
@@ -117,7 +116,7 @@ export function GetCard() {
                             position: "absolute",
                             top: 45
                         }}>
-                            <View style={{ flex: 1, borderRadius: 6, flexDirection: 'row' }}>
+                            <View style={{ flex: 1,  flexDirection: 'row' }}>
                                 <View style={{ flex: 1 }}>
                                     <Texto size={10} Bold colorLabel={Colors.midnightblue}>MasterCard Gold</Texto>
                                     <Texto size={10} Bold colorLabel={Colors.dimgray}>Banco Santander</Texto>
