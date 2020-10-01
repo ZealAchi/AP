@@ -27,6 +27,7 @@ export default class BarChart extends PureComponent {
         const graphHeight = SVGHeight - 2 * GRAPH_MARGIN
         const graphWidth = SVGWidth - 2 * GRAPH_MARGIN
         const data = this.props.data
+        // console.log(data, 'data')
 
         // X scale point
         const xDomain = data.map(item => item.label)
@@ -37,7 +38,7 @@ export default class BarChart extends PureComponent {
             .padding(1)
 
         // Y scale linear
-        const maxValue = d3.max(data, d => d.gastos.value || d.ingresos.value)
+        const maxValue = d3.max(data, d => d.gastos&&d.gastos.value || d.ingresos&&d.ingresos.value)
         const topValue = Math.ceil(maxValue / this.props.round) * this.props.round
         const yDomain = [0, topValue]
         const yRange = [0, graphHeight]
@@ -57,17 +58,6 @@ export default class BarChart extends PureComponent {
             >
                 <Svg width={SVGWidth - 50} height={SVGHeight}>
                     <G y={graphHeight + GRAPH_MARGIN}>
-                        {/* Top value label */}
-                        {/* <Text
-              x={graphWidth}
-              textAnchor="end"
-              y={y(topValue) * -1 - 5}
-              fontSize={12}
-              fill="black"
-              fillOpacity={0.4}>
-              {topValue + ' ' + this.props.unit}
-            </Text> */}
-
                         {data.map(item => (
                             <Text
                                 key={'label' + item.label}
@@ -79,52 +69,23 @@ export default class BarChart extends PureComponent {
                                 fillOpacity={0.4}
                             >{item.label}</Text>
                         ))}
-                        {/* top axis */}
-                        {/* <Line
-            x1="0"
-            y1={y(topValue) * -1}
-            x2={graphWidth}
-            y2={y(topValue) * -1}
-            stroke={colors.axis}
-            strokeDasharray={[3, 3]}
-            strokeWidth="0.5"
-          /> */}
-
-                        {/* middle axis */}
-                        {/* <Line
-            x1="0"
-            y1={y(middleValue) * -1}
-            x2={graphWidth}
-            y2={y(middleValue) * -1}
-            stroke={colors.axis}
-            strokeDasharray={[3, 3]}
-            strokeWidth="0.5"
-          /> */}
-
-                        {/* bottom axis */}
-                        {/* <Line
-            x1="0"
-            y1="2"
-            x2={graphWidth}
-            y2="2"
-            stroke={colors.axis}
-            strokeWidth="0.5"
-          /> */}
-
                         {/* bars */}
-                        {data.map(item => (
-                            <Rect
-                                key={'bar' + item.label}
-                                x={x(item.label) - (GRAPH_BAR_WIDTH * 2)}
-                                y={y(item.gastos.value) * -1}
-                                rx={2.5}
-                                width={GRAPH_BAR_WIDTH}
-                                height={y(item.gastos.value)}
-                                fill={item.activo === true ? colors.gastos : colors.default}
-                            />
-                        ))}
-                        {data.map(item => (
-                            <Rect
+                        {data.map(item => {
+                            return (<>
+                                {item.gastos && <Rect
+                                    key={'bar' + item.label}
+                                    x={x(item.label) - (GRAPH_BAR_WIDTH * 2)}
+                                    y={y(item.gastos.value) * -1}
+                                    rx={2.5}
+                                    width={GRAPH_BAR_WIDTH}
+                                    height={y(item.gastos.value)}
+                                    fill={item.activo === true ? colors.gastos : colors.default}
+                                />}</>
+                            )
+                        })}
+                        {data.map(item => {
+                            return (<>
+                                {item.ingresos && <Rect
                                 key={'bar' + item.label}
                                 x={x(item.label) - (GRAPH_BAR_WIDTH / 2)}
                                 y={y(item.ingresos.value) * -1}
@@ -132,21 +93,10 @@ export default class BarChart extends PureComponent {
                                 width={GRAPH_BAR_WIDTH}
                                 height={y(item.ingresos.value)}
                                 fill={item.activo === true ? colors.ingresos : colors.default}
-                            ></Rect>
-                        ))}
-
-
-
+                                />}</>
+                                )
+                            })}
                         {/* labels */}
-                        {/* {data.map(item => (
-            <Text
-            key={'label' + item.label}
-            fontSize="8"
-            x={x(item.label)/2}
-            y="9"
-            textAnchor="middle">{item.label}12</Text>
-          ))}
-           */}
                     </G>
                 </Svg>
             </ScrollView>
@@ -158,7 +108,6 @@ export default class BarChart extends PureComponent {
                     <Entypo name="chevron-right" color={Colors.Texto3} size={20} style={{ right: 5 }} />
                 </TouchableOpacity>
             </View>
-            {/* <Button label="Screen 3" onPress={() => { this.scroll.scrollTo({ x: screenWidth * 2 }) }} /> */}
         </View>
         )
     }

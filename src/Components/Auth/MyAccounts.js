@@ -31,7 +31,7 @@ export function MyAccounts(props) {
     const amount=route?.params?.monto;
     // const withBanlance=route?.params?.withBanlance;
     return (
-        <ScreenContainer backgroundColor={Colors.Secondary} >
+        <ScreenContainer backgroundColor={Colors.Secondary} scrollView>
             <View style={{ display: 'flex', paddingLeft: 12, paddingRight: 12 }}>
                 <Header Return />
             </View>

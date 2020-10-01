@@ -95,7 +95,7 @@ export function EnterYourPin(props) {
             if (props === true) {
                 navigation.reset({
                     index: 0,
-                    routes: [{ name: 'History', params: { type: 'pagar' } }],
+                    routes: [{ name: 'History', params: { type: 'pagar',user:data?.user} }],
                 });
             }
             setPin([])

@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { View, Text, StyleSheet, Dimensions, FlatList, Animated } from 'react-native'
+import { View, Text, StyleSheet, Dimensions, Animated } from 'react-native'
 import CarouselItem from './CarouselItem'
 import { dp } from '../dist/Responsive.dev'
 
-
+import {FlatList} from "react-native-gesture-handler";
 const { width, heigth } = Dimensions.get('window')
 
 const Carousel = ({ data, typeDotView,height:heightP }) => {

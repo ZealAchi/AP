@@ -16,11 +16,22 @@ import { IngresaTusDocumentos } from './NoAuth/CreateAccount/IngresaTusDocumento
 import { DataContext } from './Context/Datos.Context';
 import { LoadingContext } from './Context/Load.Context';
 import { useEffect } from 'react';
+import { History } from './Components/Auth/History';
+import { ViewTransacciones } from './Components/Auth/Analisis/ViewTransacciones';
+import { DetalleMovimiento } from './Components/Auth/Analisis/Detalle';
+import { MovimientoEditar } from './Components/Auth/Analisis/Edit';
+import { TimeMachine } from './Components/Auth/Analisis/TimeMachine';
+import { MyAccount } from './Components/Auth/MyAccount';
 
 
 
 
 export function App() {
+  // return <TimeMachine/>
+  // return <MovimientoEditar/>
+  // return <DetalleMovimiento/>
+  // return <ViewTransacciones/>
+  // return(<MyAccount/>)
   return (
     <Context>
       <ContentApp />
@@ -55,8 +66,8 @@ const ContentApp = () => {
     },
     getStateFromPath: (path, options) => {
 
-      console.log(path, options, 'path,options')
-      console.log("sa")
+      // console.log(path, options, 'path,options')
+      // console.log("sa")
       // const data = { amount: JSON.parse(`${newMonto}00`), currency: JSON.parse(Currency), to_uuid: user.uuid }
       var datos = path.split('/')
       datos.shift()
@@ -80,7 +91,7 @@ const ContentApp = () => {
     },
     getPathFromState(state, config) {
 
-      console.log(state, config, 'state, config')
+      // console.log(state, config, 'state, config')
       // Return a path string here
       // You can also reuse the default logic by importing `getPathFromState` from `@react-navigation/native`
     },

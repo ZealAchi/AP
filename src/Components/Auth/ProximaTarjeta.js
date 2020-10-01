@@ -59,7 +59,8 @@ const ItemsNexCard = [
         Nota: "5/5 en múltiples beneficios",
         rentaMinima: "$1.700.000",
         link: "http://t.ly/lux2",
-    },
+    }
+    
 ]
 export function NextCard() {
     return (

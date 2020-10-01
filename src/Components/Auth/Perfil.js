@@ -62,11 +62,13 @@ export function Perfil({ navigation }) {
         getAvatar(image)
     }, [image])
 
+   
     const ItemsSettings = [
         {
             titulo: "Cuenta",
             items: [
-                { icon: () => <FontAwesome5 name="wallet" size={20} color={Colors.Primary} />, label: 'Tus bancos', onPress: () => { navigation.navigate('MyAccounts') }, arrow: true },
+                { icon: () =><Image source={require('./../../Assets/Eleccion.png')} style={{ height: 27, width: 35,zIndex:1}} />, label: 'Mi cuenta Allpay', onPress: () => { navigation.navigate('MyAccount') }, arrow: true },
+                { icon: () => <FontAwesome5 name="wallet" size={20} color={Colors.Primary} />, label: 'Tus bancos', onPress: () => {navigation.navigate('MyAccounts',{type:"onlyBanks"})}, arrow: true },
                 { icon: () => <FontAwesome5 name="credit-card" size={20} color={Colors.Primary} />, label: 'Tus tarjetas', onPress: () => { navigation.navigate('Wallet') }, arrow: true },
                 { icon: () => <Fontistof name="line-chart" size={20} color={Colors.Primary} />, label: 'Ver movimientos', onPress: () => { navigation.navigate('Analysis') }, arrow: true },
                 { icon: () => <Octicons name="settings" size={20} color={Colors.Primary} />, label: 'Ajustes', onPress: () => { }, arrow: true },
@@ -97,6 +99,7 @@ export function Perfil({ navigation }) {
             ]
         },
     ]
+    
     return (<ScreenContainer padding scrollView backgroundColor={'transparent'}>
         <Texto Bold>Mi Perfil</Texto>
         <TouchableOpacity style={{marginTop:12}} onPress={() => navigation.navigate('UpdatePerfil')}>

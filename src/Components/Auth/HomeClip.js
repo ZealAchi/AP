@@ -1,9 +1,9 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable no-trailing-spaces */
-import React, { useEffect, useContext, useState } from 'react'
+import React, { useEffect, useContext,useRef, useState } from 'react'
 
 import { ProgressCircle } from 'react-native-svg-charts'
-import { View, Image, ScrollView, TouchableOpacity, Pressable, StatusBar, StyleSheet, RefreshControl } from 'react-native'
+import { View, Image, TouchableOpacity, Pressable, StatusBar, StyleSheet, RefreshControl } from 'react-native'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
 
@@ -24,6 +24,7 @@ import * as RootNavigation from '../../Navigations/RootNavigation'
 // import { ContactsContext } from '../../Context/Contacts.Context'
 // import { MyStatusBar } from '../../UI/MyStatusBar'
 import { Header } from '../../UI/Header';
+import { PanGestureHandler, RectButton, ScrollView } from 'react-native-gesture-handler'
 export function HomeClip({ navigation }) {
     const API = useAPI()
     // const { state: stateContext } = useContext(ContactsContext);
@@ -82,12 +83,33 @@ export function HomeClip({ navigation }) {
         { label: 'Crear un código QR para recibir plata', icon: <FontAwesome name="qrcode" color={Colors.Primary} size={23} />, onPress: () => navigation.navigate('CobrarQR') },
         { label: 'Invita a amigos y gana premios', icon: <Ionicons name="md-person-add" color={Colors.Primary} size={23} />, onPress: () => navigation.navigate('InvitaGana') },
     ]
-    return (
-        <ScrollView
-            style={styles.scrollView}
-            refreshControl={
-                <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+    const handleGesture = (evt) => {
+        let { nativeEvent } = evt
+        if (nativeEvent.numberOfPointers === 2) {
+            if (nativeEvent.translationY < 0) {
+                navigation.navigate('PagarQR')
+            } else if (nativeEvent.translationY > 0) {
+                navigation.navigate('MyAccount')
             }
+        }else
+        if (nativeEvent.numberOfPointers === 1) {
+            console.log(nativeEvent)
+            if (nativeEvent.translationY > 0) {
+                onRefresh()
+                return <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+            }
+        }
+    }
+    const ScrollRef=useRef(null)
+
+    return (
+        <PanGestureHandler  onGestureEvent={handleGesture} maxPointers={2} waitFor={ScrollRef} activeOffsetY={[-10,10]} activeOffsetX={[-200,200]}>
+        <ScrollView
+        ref={ScrollRef}
+            style={styles.scrollView}
+            // refreshControl={
+            //     <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+            // }
         >
             <ScreenContainer NoMyStatusBar backgroundColor={Colors.Secondary} padding scrollView backgroundColorScrollView="white">
                 <SafeAreaView style={{}}>
@@ -120,32 +142,15 @@ export function HomeClip({ navigation }) {
                         </Block>
                     </View>
                     <Block flexDirection="column">
-                        {/* <View style={{ flex: 0, flexDirection: 'row', marginBottom: 8, marginTop: 18 }}> */}
-                        {/* <Block style={{ borderBottomColor: Colors.darkgray, borderBottomWidth: 2 }} /> */}
-                        {/* <Block style={{ borderBottomColor: Colors.Primary, borderBottomWidth: 2 }}> */}
-                        {/* <Texto size={13} Bold colorLabel={Colors.midnightblue} style={{ textAlign: 'center' }}>Contactos</Texto> */}
-                        {/* </Block> */}
-                        {/* <Block style={{ borderBottomColor: Colors.darkgray, borderBottomWidth: 2 }} /> */}
-                        {/* </View> */}
                         <View style={{ alignItems: 'center', justifyContent: 'center', paddingTop: 1, marginBottom: 8 }}>
-                            {/* <TextInput onChangeText={text => search(contactsMatch, text, setBuscarContacto)} borderRadius left icon={{ type: '', name: 'search' }} style={{ width: 343, height: 38, fontSize: 12, alignItems: 'center', justifyContent: 'center', alignSelf: 'center', backgroundColor: Colors.lavender }} placeholder="Buscar Amigos" /> */}
                         </View>
-                        {/* <View style={{ display: 'flex', flex: 1, borderTopWidth: 1, borderTopColor: Colors.darkgray }}>
-                            {Options.map((item, i) => {
-                                return (<TouchableOpacity key={i} onPress={() => item.onPress()} style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', height: 51, borderBottomColor: Colors.darkgray, borderBottomWidth: 1 }}>
-                                    <View style={{ marginLeft: 12 }}>{item.icon}</View>
-                                    <View style={{ marginLeft: 12 }}><Texto size={14} colorLabel={Colors.Primary}>{item.label}</Texto></View>
-                                </TouchableOpacity>)
-                            })}
-                        </View> */}
                         <View style={{ marginBottom: 50 }}>
-                            {/* <ContactsM searchContact={buscarContacto} type={'History'} home /> */}
                         </View>
                     </Block>
                 </SafeAreaView>
-
             </ScreenContainer>
         </ScrollView>
+        </PanGestureHandler>
     )
 }
 
@@ -169,7 +174,7 @@ const Carousel1 =
                     </View>
                     <View>
                         <Texto colorLabel={Colors.Texto4} size={12}>Saldo general</Texto>
-                        <Texto colorLabel={Colors.Texto3} size={12}>{`$ ${balances?.AllPay?.amount ? balances?.AllPay?.amount : '0'}`}</Texto>
+                        <Texto colorLabel={Colors.Texto3} Bold size={12}>{`$ ${balances?.AllPay?.amount ? balances?.AllPay?.amount : '0'}`}</Texto>
                     </View>
                 </View>
                 {children && children}
@@ -193,7 +198,7 @@ const Carousel1 =
                                     </View>
                                 </View>
                             </View>
-                            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'flex-end' }}>
+                            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'flex-end',paddingRight:12 }}>
                                 <Button onPress={() => RootNavigation.navigate('SaldoAllPay')} size={12} styleButton={{ borderRadius: 15, marginTop: 5, width: 111, height: 24 }} label="Agregar Saldo" />
                             </View>
                         </View>
@@ -213,25 +218,25 @@ const Carousel2 =
     [{
         data: (children, height) => {
             return (
-                <Pressable style={{ flex: 1, backgroundColor: 'white', borderRadius: 12 }}>
+                <RectButton style={{ flex: 1, backgroundColor: 'white', borderRadius: 12 }} onPress={()=>{RootNavigation.navigate('Movements',{type:"Itaú"})}}>
                     <View style={{ flexDirection: 'row', flex: 1, backgroundColor: 'white', justifyConent: "center", alignItems: "center", borderRadius: 12 }}>
                         <ItemBank2 cuenta style={{ flex: 1, marginTop: 12 }} data={{ nombre: 'Itaú', img: require('../../Assets/HomeItau.png') }} />
                     </View>
                     <View style={{ bottom: 6 }}>
                         {children && children}
                     </View>
-                </Pressable>)
+                </RectButton>)
         }
     }, {
         data: (children, height) => {
             return (
-                <Pressable style={{ flex: 1, backgroundColor: 'white', borderRadius: 12 }}>
+                <RectButton style={{ flex: 1, backgroundColor: 'white', borderRadius: 12 }} onPress={()=>{RootNavigation.navigate('Movements',{type:"Santander"})}}>
                     <View style={{ flexDirection: 'row', flex: 1, backgroundColor: 'white', justifyConent: "center", alignItems: "center", borderRadius: 12,paddingLeft:12,paddingRight:12}}>
                             <ItemBank2 cuenta style={{ flex: 1, marginTop: 12 }} data={{ nombre: 'Santander', img: require('../../Assets/Santander.png') }} /></View>
                         <View style={{ bottom: 6 }}>
                             {children && children}
                         </View>
-                </Pressable>)
+                </RectButton>)
         }
     }, {
         data: (children, height) => {
@@ -278,12 +283,12 @@ const Carousel3 =
                         <Block flexDirection="row">
                             <Block style={{ height: '60%', borderRightColor: Colors.darkgray, borderRightWidth: 1 }}>
                                 <Texto colorLabel={Colors.Primary} size={12}>Ingresos</Texto>
-                                <Texto colorLabel={Colors.midnightblue} size={12}>$14.555.412</Texto>
+                                <Texto colorLabel={Colors.midnightblue} Bold size={12}>$14.555.412</Texto>
                             </Block>
                             <Block>
                                 <View style={{ marginLeft: 10 }}>
                                     <Texto colorLabel={Colors.Primary} size={12}>Gastos</Texto>
-                                    <Texto colorLabel={Colors.midnightblue} size={12}>$14.555.412</Texto>
+                                    <Texto colorLabel={Colors.midnightblue} Bold size={12}>$14.555.412</Texto>
                                 </View>
                             </Block>
                         </Block>

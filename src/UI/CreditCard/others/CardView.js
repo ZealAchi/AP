@@ -151,7 +151,7 @@ export default class CardView extends Component {
         { translateY: ((BASE_SIZE.height * (scale - 1) / 2)) },
       ]
     };
-    console.log(write, 'write')
+    // console.log(write, 'write')
 
     return (
 

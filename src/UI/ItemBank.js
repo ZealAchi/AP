@@ -32,6 +32,8 @@ ${({ nostyle }) => !nostyle ? `
 
 `
 export const  ItemBank=memo((props)=> {
+
+    console.log(props,'props')
     const { nostyle, data, title, type, style, setSelect, onPress = () => { } } =props
     const { ganancia, img, nombre, name, updated_at,withBanlance,balance,bid} = data
     const [imagen,setImagen]=useState()
@@ -60,7 +62,8 @@ export const  ItemBank=memo((props)=> {
     const SeeType = () => {
         switch (type) {
             case 'addBalance':
-                RootNavigation.navigate('SaldoAllPay',{amount:props.data.amount})
+                setSelect(data.bid)
+                RootNavigation.navigationRef.current.goBack()
                 break;
             case 'AddBank':
                 SelectBank();
@@ -93,10 +96,12 @@ export const  ItemBank=memo((props)=> {
         </View>}
         <View style={{ flexDirection: 'row', flex: 1, }}>
             <Block flexDirection="row" style={{ alignItems: 'center' }}>
-            {data.nombre==='WebPay'?<SvgUri width="40.65px" height="40.65px" uri="https://webpay3gint.transbank.cl/webpayserver/imagenes/webpayplus.svg"/>:
+            {(data.nombre==='WebPay'||data.nombre==='Webpay')?<SvgUri width="40.65px" height="40.65px" uri="https://webpay3gint.transbank.cl/webpayserver/imagenes/webpayplus.svg"/>:
             <Image style={{ width: 40.65, height: 40.65 }} source={img?(
-                data.nombre === 'AllPay'||data.nombre === 'Santander'||data.nombre === 'Itaú'
-                )?img:{uri:img}:{uri:imagen}} />
+                data.nombre === 'AllPay'||data.nombre === 'Santander'||data.nombre === 'Itaú'/*||
+                data.nombre === 'Webpay'*/||data.nombre === 'Paypal'||data.nombre === 'Crypto'||
+                data.nombre === 'Servipag'||data.nombre === 'Caja Vecina'
+                )?img:{uri:img}:{uri:imagen}} resizeMode="contain" />
             }
                 <View style={{ paddingLeft: 8 }}>
                     <Texto size={12}>{nombre || name}</Texto>
@@ -114,7 +119,7 @@ export const  ItemBank=memo((props)=> {
             </Block>
             <Block style={{ justifyContent: 'center', alignItems: 'flex-end' }}>
                 {!type === 'MyAccounts' && <Texto colorLabel={Colors.dimgray} size={13} colorLabel={Colors.dimgray}>{'saldo'}</Texto>}
-                {withBanlance &&balance&&<Texto size={13} colorLabel={Colors.Primary}>${balance}</Texto>}
+                {withBanlance &&balance&&<Texto size={13} Bold colorLabel={Colors.Primary}>${balance}</Texto>}
             </Block>
         </View>
     </StyledItemBank>)
@@ -122,7 +127,8 @@ export const  ItemBank=memo((props)=> {
 export function ItemBank2({nocuenta,cuenta,onlyname,noSaldo, allpay,general, data, title, type, style, onPress = () => { } }) {
     
     const {balances}=useContext(DataContext)
-    const { ganancia, img, nombre,balance=nombre==='Itaú'?balances?.Itau?.amount:nombre==='Santander'?balances?.Santander?.amount:undefined} = data
+    const { ganancia,noSaldo:noSaldo2, img, nombre,balance=nombre==='Itaú'?balances?.Itau?.amount:nombre==='Santander'?balances?.Santander?.amount:undefined,withBanlance} = data
+    const noSaldoV=noSaldo||noSaldo2
     var date = new Date();
     var hours = date.getHours();
     var minutes = date.getMinutes();
@@ -130,7 +136,8 @@ export function ItemBank2({nocuenta,cuenta,onlyname,noSaldo, allpay,general, dat
     if(hours<10){hours='0'+hours}
     if(minutes<10){minutes='0'+minutes}
     var hoy = `${hours}:${minutes}`;
-
+    {console.log(nombre,'nombre :v')}
+    console.log(noSaldoV,'noSaldoV')
     return (
         <StyledItemBank onPress={onPress} nostyle style={[{ width: '98%', padding: 10, backgroundColor: 'white', marginBottom: 12 },style]}>
             <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', flexDirection: 'row' }}>
@@ -141,23 +148,30 @@ export function ItemBank2({nocuenta,cuenta,onlyname,noSaldo, allpay,general, dat
             </View>
             <View style={{ flex: 5, display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
                 <Block flexDirection="row">
-                    <Image style={{ width: 40.65, height: 40.65 }} source={img} />
+
+                {(data.nombre==='WebPay'||data.nombre==='Webpay')?<SvgUri width="40.65px" height="40.65px" uri="https://webpay3gint.transbank.cl/webpayserver/imagenes/webpayplus.svg"/>:
+                <Image style={{ width: 40.65, height: 40.65 }} source={img} resizeMode="contain" />
+                }
                     
                     {onlyname?<Block style={{ marginLeft: 8,justifyContent:'center'}}>
                         <Texto size={12} colorLabel={Colors.midnightblue}>{!allpay ? nombre?nombre:'Itaú' : <Texto Texto size={12} colorLabel={Colors.midnightblue}>
                             Saldo All<Texto Bold size={12} colorLabel={Colors.midnightblue}>Pay</Texto></Texto>}</Texto>
                     </Block>
                 :<Block style={{ marginLeft: 8 }}>
-                <Texto size={12} colorLabel={Colors.midnightblue}>{(!allpay) ? data.nombre?nombre:'Itaú' : <Texto Texto size={12} colorLabel={Colors.midnightblue}>
-                    Saldo {nombre==='Santander'?"Santander":nombre==='Itaú'?"Itaú":<Texto Bold size={12} colorLabel={Colors.midnightblue}>Pay</Texto>} </Texto>}</Texto>
-    <Texto size={12} colorLabel={Colors.dimgray}>Hoy, {hoy}</Texto>
+                    
+                {(nombre !== "Webpay"||nombre !== "Paypal"||nombre !== "Crypto"||nombre !== "Servipag"||nombre !== "Caja Vecina"||!nombre)&&
+                <React.Fragment><Texto size={12} colorLabel={Colors.midnightblue}>{(!allpay) ? data.nombre?nombre:'Itaú' : <Texto Texto size={12} colorLabel={Colors.midnightblue}>
+                    Saldo {nombre === "Santander"?"Santander":
+                                        nombre === "Itaú"?"Itaú":<Texto Bold size={12} colorLabel={Colors.midnightblue}>AllPay</Texto>} </Texto>}</Texto>
+                                        <Texto size={12} colorLabel={Colors.dimgray}>Hoy, {hoy}</Texto></React.Fragment>}
+    
             </Block>
                 }
                 </Block>
                 <Block style={{ flexDirection: 'row-reverse' }}>
-                {!noSaldo&&<View>
+                {!noSaldoV&&<View>
                         {!allpay||balance && <Texto colorLabel={Colors.Texto4} size={12}>Saldo{general&&' general'}</Texto>}
-                        <Texto colorLabel={Colors.Texto3} size={12}>{`$ ${balance?balance:'15.131.495'}`}</Texto>
+                        <Texto colorLabel={Colors.Texto3} Bold size={12}>{`$ ${balance?balance:'15.131.495'}`}</Texto>
                     </View>}
                 </Block>
             </View>

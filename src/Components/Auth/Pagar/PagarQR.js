@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable no-trailing-spaces */
 import React, { useState, useEffect, useContext } from 'react'
-import { Text, View, Alert } from 'react-native';
+import { Text, View, Alert,StatusBar } from 'react-native';
 
 import { RNCamera } from 'react-native-camera';
 import { ScreenContainer } from '../../ScreenContainer'
@@ -23,21 +23,7 @@ export function PagarQR(props) {
     const [selectBank, setSelectBank] = useState()
     const [state, setState] = useState()
     const [scanned, setScanned] = useState(false)
-    // const WalletSend = (data) => {
-    //     API.PostAPI.WalletSend(data, (isTrue) => {
-    //         if (isTrue) {
-    //             navigation.replace('History', {
-    //                 type: 'pagar',
-    //             })
-    //         } else {
-    //             navigation.pop()
-    //             setTimeout(() => {
-    //                 setScanned(false)
-    //                 setState();
-    //             }, 5500)
-    //         }
-    //     }, 'payUser')
-    // }
+    StatusBar.setBackgroundColor(Colors.Primary)
     useEffect(() => {
         if (state) {
             try {
@@ -113,7 +99,7 @@ export function PagarQR(props) {
     }, [navigation])
 
     return (
-        <ScreenContainer barBackgroundColor={Colors.Primary} backgroundColor={Colors.Primary}>
+        <ScreenContainer backgroundColor={Colors.Primary}>
             <View style={{ marginTop: 12, paddingLeft: 12, paddingRight: 12 }}>
                 <Header Return color={Colors.Secondary} />
             </View>

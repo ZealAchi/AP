@@ -89,20 +89,20 @@ export function UpdatePerfil() {
             </View>
             <View style={{ flex: 1 }}></View>
         </View>
-        <View>
-            <Texto size={12}>Nombre</Texto>
+        <View style={{marginTop:14}}>
+            <Texto size={12} style={{borderBottomColor:Colors.lavender,borderBottomWidth:1}}>Nombre</Texto>
             <TextInput backgroundColor={'transparent'} placeholder="Juan" value={state.first_name} onChangeText={(e) => { setState({ ...state, first_name: e }) }}></TextInput>
         </View>
         <View>
-            <Texto size={12}>Apellido</Texto>
+            <Texto size={12} style={{borderBottomColor:Colors.lavender,borderBottomWidth:1}}>Apellido</Texto>
             <TextInput backgroundColor={'transparent'} placeholder="Perez" value={state.last_name} onChangeText={(e) => { setState({ ...state, last_name: e }) }}></TextInput>
         </View>
         <View>
-            <Texto size={12}>Correo</Texto>
+            <Texto size={12} style={{borderBottomColor:Colors.lavender,borderBottomWidth:1}}>Correo</Texto>
             <TextInput backgroundColor={'transparent'} placeholder="Juan@gmail.com" value={state.email} onChangeText={(e) => { setState({ ...state, email: e }) }}></TextInput>
         </View>
         <View>
-            <Texto size={12}>Telefono</Texto>
+            <Texto size={12} style={{borderBottomColor:Colors.lavender,borderBottomWidth:1}}>Telefono</Texto>
             <TextInput backgroundColor={'transparent'} placeholder="7721235778" value={state.phone} /*onChangeText={(e) => { setState({ ...state, phone: e }) }}*/></TextInput>
         </View>
         </ScrollView>

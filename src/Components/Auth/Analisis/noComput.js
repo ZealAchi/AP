@@ -15,8 +15,24 @@ export function NoComput({ navigation }) {
         });
         return unsubscribe;
     }, [navigation])
+
+    const NoComput = {
+        type: "Gastado",
+        percentage: "80",
+        cantidad: "1.055.194",
+        Items: [
+            // {
+            //     Entypo:true,
+            //     icon: "help",
+            //     title: "Transferencias",
+            //     amount: "225.000",
+            //     movements:true,
+            //     numberMovements:6
+            // },
+        ]
+    }
     return (<ScreenContainer NoMyStatusBar scrollView backgroundColor={Colors.Secondary}>
-        <ContentAnalisis />
+        <ContentAnalisis {...{NoComput}}/>
 
     </ScreenContainer>)
 }

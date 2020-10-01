@@ -52,11 +52,11 @@ export function Analysis() {
                     </View>
                     <View style={{ flex: 1, borderLeftColor: Colors.darkgray, borderLeftWidth: 1,paddingLeft:12 }}>
                         <Texto size={12} Bold colorLabel={Colors.Primary}>Gastos</Texto>
-                        <Texto size={12} Bold>$855.194</Texto>
+                        <Texto size={12} Bold>$963.957</Texto>
                     </View>
                     <View style={{ flex: 1, borderLeftColor: Colors.darkgray, borderLeftWidth: 1,paddingLeft:12 }}>
                         <Texto size={12} Bold colorLabel={Colors.Primary}>Neto</Texto>
-                        <Texto size={12} Bold>+$600.000</Texto>
+                        <Texto size={12} Bold>+$91.237</Texto>
                     </View>
                 </View>
             </View>

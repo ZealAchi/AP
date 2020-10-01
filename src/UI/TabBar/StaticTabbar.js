@@ -106,24 +106,25 @@ export default function StaticTabbar(props) {
                                             onPress={() => {
                                                 navigation.navigate('PagarHome', {top:true, monto: undefined, message: undefined, account:undefined})
                                             }}
-                                        ><Image source={require('./icons/Pagar.png')} style={{ height: 30, width: 32 }} /></Pressable>}
+                                        >
+                                            <Image source={require('./icons/Pagar.png')} style={{ height: 30, width: 32 }} />
+                                            </Pressable>}
                                     {tab.name === 'Mis Bancos' &&
                                         <Pressable
                                             onPress={() => {
-                                                navigation.navigate('MyAccounts')
+                                                navigation.navigate('MyAccounts',{type:"onlyBanks"})
                                             }}
                                         >
-                                            
                                             <FontAwesome5 name="wallet" size={26} color={Colors.darkgray} style={{}} />
-                                            {/* <Image source={require('./icons/Cobrar.png')} style={{ height: 30, width: 32 }} /> */}
                                             </Pressable>}
-                                    {/* {tab.name==='Tarjetas'&&<Image source={require('./icons/Default.png')} style={{ height: 32, width: 32 }} />} */}
                                     {tab.name === 'Compartir Tarjeta' &&
                                         <Pressable
                                             onPress={() => {
                                                 navigation.navigate('Compartir Tarjeta')
                                             }}
-                                        ><Image source={require('./icons/Compartir.png')} style={{ height: 30, width: 32 }} /></Pressable>}
+                                        >
+                                            <Image source={require('./icons/Compartir.png')} style={{ height: 30, width: 32 }} />
+                                            </Pressable>}
                                     {tab.name === 'Más' &&
                                         <Pressable
                                             onPress={() => {
@@ -151,21 +152,14 @@ export default function StaticTabbar(props) {
                                 }}
                             >
                                 <View style={styles.activeIcon}>
-                                    {/* <Icon name={tab.name} color="black" size={35} /> */}
-                                    {/* {tab.name==='Tarjetas'&&<Image source={require('./icons/Eleccion.png')} style={{ height: 32, width: 32 }} />} */}
                                     {tab.name === 'Tarjetas' && <Pressable
                                         onPress={() => {
                                             navigation.navigate('Wallet')
                                         }}
                                         style={{alignItems:'center'}}
                                     >
-                                        <Image source={require('./icons/Eleccion.png')} style={{ height: 75, width: 75,zIndex:1}} />
-                                        <Image source={require('./icons/Default1.png')} style={{ height: 25, width: 32,top:-52,zIndex:2}} /></Pressable>}
-                                    
-                                    {/* {tab.name==='Pagar'&&<Image source={require('./icons/Pagar.png')} style={{ height: 32, width: 32 }} />} */}
-                                    {/* {tab.name==='Cobrar'&&<Image source={require('./icons/Cobrar.png')} style={{ height: 32, width: 32 }} />} */}
-                                    {/* {tab.name==='Compartir Tarjeta'&&<Image source={require('./icons/Compartir.png')} style={{ height: 32, width: 32 }} />} */}
-                                    {/* {tab.name==='Más'&&<Image source={require('./icons/Mas.png')} style={{ height: 32, width: 32 }} />} */}
+                                        <Image source={require('./../../Assets/Eleccion.png')} style={{ height: 75, width: 75,zIndex:1}} />
+                                        </Pressable>}
                                 </View>
                             </Animated.View>
                         </React.Fragment>

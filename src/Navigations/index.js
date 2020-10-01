@@ -34,6 +34,12 @@ import { History } from '../Components/Auth/History';
 import { RutAndPin } from '../NoAuth/RutAndPin';
 import { QueSonYPorQue } from '../Components/Auth/AddBank/queSonYporQue';
 import { Pay } from '../Components/Auth/Pay';
+import { VerTransferencia } from '../Components/Auth/History/VerTransferencia';
+import { MovimientoEditar } from '../Components/Auth/Analisis/Edit';
+import { DetalleMovimiento } from '../Components/Auth/Analisis/Detalle';
+import { ViewTransacciones } from '../Components/Auth/Analisis/ViewTransacciones';
+import { TimeMachine } from '../Components/Auth/Analisis/TimeMachine';
+import { MyAccount } from '../Components/Auth/MyAccount';
 
 const RootStack = createStackNavigator()
 
@@ -77,6 +83,14 @@ export const RootStackScreen = () => {
     <RootStack.Screen name="Messages" options={{header:()=>null}} component={Messages}/>
     <RootStack.Screen name="MessagesT" options={{header:()=>null}} component={MessagesT}/>
     <RootStack.Screen name="History" options={{header:()=>null}} component={History}/>
+
+    <RootStack.Screen name="VerTransferencia" options={{header:()=>null}} component={VerTransferencia}/>
+    <RootStack.Screen name="MovimientoEditar" options={{header:()=>null}} component={MovimientoEditar}/>
+    <RootStack.Screen name="DetalleMovimiento" options={{header:()=>null}} component={DetalleMovimiento}/>
+    <RootStack.Screen name="ViewTransacciones" options={{header:()=>null}} component={ViewTransacciones}/>
+    <RootStack.Screen name="TimeMachine" options={{header:()=>null}} component={TimeMachine}/>
+    <RootStack.Screen name="MyAccount" options={{header:()=>null}} component={MyAccount}/>
+    
     <RootStack.Screen name="Pay" options={{header:()=>null}} component={Pay}/>
     
   </RootStack.Navigator>)

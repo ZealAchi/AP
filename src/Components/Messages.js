@@ -63,7 +63,7 @@ export function MessagesT(props) {
     return (
         <ScreenContainer barBackgroundColor={Colors.Primary}>
             <StyledMessages>
-                <AntDesign name={`${kindOfAnswer}`==='1'?"checkcircle":
+                <AntDesign name={((JSON.stringify(kindOfAnswer)==='2'||JSON.stringify(kindOfAnswer)==='1'))?"checkcircle":
                 `${kindOfAnswer}`==='0'?"closecircle":
                 "closecircle"} size={82} color="white" />
                 {/* <Entypo name="" */}
@@ -78,6 +78,8 @@ function typeMessageT({message, answer}) {
         switch (answer) {
             case '1':
                 return 'Transferencia realizada.'
+            case '2':
+                    return 'Carga realizada con éxito.'
             default:
                 return 'Tu Transferencia no se pudo realizada.'
         }

@@ -1,5 +1,5 @@
 export function getTypeCreditCardImg(colorCard) {
-    console.log(colorCard,'colorCard')
+    // console.log(colorCard,'colorCard')
     switch (colorCard) {
         case 'rojo':
             return require('../UI/CreditCard/images/card-rojo-front.png')

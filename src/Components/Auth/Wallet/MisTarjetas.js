@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable no-trailing-spaces */
-import React, { useContext } from 'react';
+import React, { useContext,useState, useRef } from 'react';
 import { interpolate, Extrapolate } from "react-native-reanimated";
 import { vh, vw } from 'react-native-css-vh-vw'
 import {
@@ -11,6 +11,7 @@ import {
     Dimensions,
     Animated,
     Platform,
+    Modal
 } from 'react-native';
 import { DataContext } from "../../../Context/Datos.Context";
 import { CardView } from "../../../UI/CreditCard/type";
@@ -18,6 +19,10 @@ import { Texto } from "../../../UI/Texto";
 import { Button } from "../../../UI/Button";
 import Colors from "../../../UI/Colors";
 import { getTypeCreditCardImg } from "../../../Util/BackgroundCard";
+import AntDesign from "react-native-vector-icons/AntDesign"
+import { RectButton } from 'react-native-gesture-handler';
+import { useScrollHandler } from 'react-native-redash';
+import ModalMisTarjetas from './ModalMisTarjetas';
 
 
 const { width, height } = Dimensions.get('window');
@@ -70,32 +75,39 @@ const slides = [
 ];
 
 export function MisTarjetas({ navigation }) {
+    const [openOptions,setOpenOptions]=useState(false)
+    const [infoCard,setInfoCard]=useState()
     const { state } = useContext(DataContext)
     const first_name = state?.user?.profile?.first_name
     const last_name = state?.user?.profile?.last_name
-    const scrollX = React.useRef(new Animated.Value(0)).current;
-
+    const scroll = React.useRef(new Animated.Value(0));
+    const { scrollHandler, x } = useScrollHandler();
+    const flatRef = useRef(null)
+    
     return (
         <View style={[styles.container, { backgroundColor: 'white' }]}>
-
+            <ModalMisTarjetas openOptions={openOptions} infoCard={infoCard} setOpenOptions={setOpenOptions} MisTarjetas/>
             <Animated.FlatList
                 showsHorizontalScrollIndicator={false}
                 data={slides}
+                ref={flatRef}
+                // ref={ref => {flatRef = ref}}
                 keyExtractor={(item) => item.key}
                 horizontal
                 bounces={false}
                 decelerationRate={Platform.OS === 'ios' ? 0 : 0.98}
                 renderToHardwareTextureAndroid
                 contentContainerStyle={{ alignItems: 'flex-start' }}
-                style={{ flex: 1, /*backgroundColor: 'blue', */marginTop: -42, marginBottom: -50 }}
+                style={{ flex: 1,  marginTop: -42, marginBottom: -40 }}
                 snapToInterval={ITEM_SIZE}
                 snapToAlignment='start'
                 onScroll={Animated.event(
-                    [{ nativeEvent: { contentOffset: { x: scrollX } } }],
+                    [{ nativeEvent: { contentOffset: { x: scroll.current } } }],
                     { useNativeDriver: false }
                 )}
                 scrollEventThrottle={16}
                 renderItem={({ item, index }) => {
+                    const positionItem=index
                     if (!item.id) {
                         return <View style={{ width: EMPTY_ITEM_SIZE }} />;
                     }
@@ -105,12 +117,13 @@ export function MisTarjetas({ navigation }) {
                         (index - 1) * ITEM_SIZE,
                         index * ITEM_SIZE,
                     ];
-
-                    const translateY = scrollX.interpolate({
+                    
+                    const translateY = scroll.current.interpolate({
                         inputRange,
                         outputRange: [100, 50, 100],
                         extrapolate: 'clamp',
                     });
+                    // console.log(translateY,'translateY')
 
                     return (
                         <View style={{ width: ITEM_SIZE, }}>
@@ -122,9 +135,11 @@ export function MisTarjetas({ navigation }) {
                                     transform: [{ translateY }],
                                     // backgroundColor: 'red',
                                     borderRadius: 34,
-                                    
+                                    // padding:12
+
                                 }]}
                             >
+                                <RectButton onPress={()=>{setOpenOptions(true);setInfoCard(item)}}>
                                 <CardView
                                     name={`${first_name?.toUpperCase()} ${last_name?.toUpperCase()}`}
                                     number={`**** **** **** ${item.DatosCard.number}`}
@@ -132,15 +147,19 @@ export function MisTarjetas({ navigation }) {
                                     imageFront={getTypeCreditCardImg(item.TipoTarjeta)}
                                     imageBack={getTypeCreditCardImg('rosa')}
                                     scale={.8} />
+                                </RectButton>
+                                
                             </Animated.View>
-                            <View style={{justifyConten: 'center', alignItems: 'center',marginTop:90}}>
+                            <View style={{ justifyConten: 'center', alignItems: 'center', marginTop: 90 }}>
                                 {slides.map(({ }, index, items) => {
-                                    const opacity = scrollX.interpolate({
+                                    const opacity = scroll.current.interpolate({
                                         inputRange: [(index - 1) * ITEM_SIZE, index * ITEM_SIZE, (index + 1) * ITEM_SIZE],
                                         outputRange: [-1, 1.1, -1],
                                         extrapolate: Extrapolate.CLAMP,
                                     })
                                     const i = index + 1
+                                    const last = index === slides.length - 1
+                                    // console.log((index - 1) * ITEM_SIZE, index * ITEM_SIZE, (index + 1) * ITEM_SIZE,'(index - 1) * ITEM_SIZE, index * ITEM_SIZE, (index + 1) * ITEM_SIZE')
                                     return (
                                         <Animated.View
                                             style={[{
@@ -154,13 +173,80 @@ export function MisTarjetas({ navigation }) {
                                                 borderRadius: 34,
                                             }]}
                                         >
-                                            <Image source={items[i]?.imgBack} style={{ height: 80, width: 80, marginTop: -50 }} borderRadius={8} />
-                                            <Texto colorLabel={Colors.midnightblue} size={12}>{items[i]?.bank}</Texto>
-                                            <Texto colorLabel={Colors.midnightblue} size={14}>{items[i]?.TipoTarjeta}</Texto>
-                                            <Texto size={10} >{`${first_name?.toUpperCase()} ${last_name?.toUpperCase()}`}</Texto>
-                                            <Texto size={12} colorLabel={Colors.darkgray}>{items[i]?.status}</Texto>
-                                            <Texto size={25} colorLabel={Colors.midnightblue}>${items[i]?.balance}</Texto>
-                                            <Texto size={12} colorLabel={Colors.midnightblue}>USD {items[i]?.USD}</Texto>
+                                            <View style={{ flex: 1, flexDirection: 'row' }}>
+                                                <View style={{ flex: 0, justifyContent: 'center' }}>
+                                                    {/* <RectButton onPress={() => {
+                                                        if (scroll) {
+                                                            flatRef.current.scrollToIndex({animated: true, index: 2})
+                                                            // const back = i-1
+                                                            // console.log(back,'back')
+                                                            // if (next === slides.length - 1) {
+                                                            // flatRef.current.scrollToIndex({ animated: true, index: 0 })
+                                                            // } else {
+                                                            // console.log(positionItem-1, 'flatRef.current')
+                                                            // flatRef.current.scrollToIndex({ animated: true, index: positionItem - 1 })
+                                                            // }
+                                                        }
+                                                    }}>
+                                                        <AntDesign name="left" size={40} color="blue" />
+                                                    </RectButton> */}
+                                                </View>
+                                                <View style={{ alignItems: 'center' }}>
+                                                    <Image source={items[i]?.imgBack} style={{ height: 80, width: 80, marginTop: -50 }} borderRadius={8} />
+                                                    <Texto colorLabel={Colors.midnightblue} size={12}>{items[i]?.bank}</Texto>
+                                                    <Texto colorLabel={Colors.midnightblue} size={14}>{items[i]?.TipoTarjeta}</Texto>
+                                                    <Texto size={10} >{`${first_name?.toUpperCase()} ${last_name?.toUpperCase()}`}</Texto>
+                                                    <Texto size={12} colorLabel={Colors.darkgray}>{items[i]?.status}</Texto>
+                                                    <Texto size={25} colorLabel={Colors.midnightblue}>${items[i]?.balance}</Texto>
+                                                    <Texto size={12} colorLabel={Colors.midnightblue}>USD {items[i]?.USD}</Texto>
+                                                </View>
+                                                <View style={{ flex: 0, justifyContent: 'center' }}>
+                                                    {/* <RectButton onPress={() => {
+                                                        if (scroll) {
+                                                            
+                                                            // if (next === slides.length - 1) {
+                                                                // flatRef.current.scrollToIndex({ animated: true, index: 0 })
+                                                            // } else {
+                                                                // flatRef.current.scrollToIndex({animated: true,viewPosition: 0.5, index: 2})
+                                                                // const currentStepIndex = positionItem + 1;
+                                                                // flatRef.current.scrollToIndex({index: currentStepIndex, animated: true});
+                                                                console.log(flatRef.current,'inputRange Global')
+                                                                // {Animated.event(
+                                                                //     [{ nativeEvent: { contentOffset: { x: scroll.current } } }],
+                                                                //     { useNativeDriver: false }
+                                                                // )}
+
+                                                                console.log(scroll,'scroll')
+                                                                console.log(flatRef.current.props.onScroll({x:150,y:150, useNativeDriver: true,nativeEvent: { contentOffset: { x:inputRange[2],y:inputRange[2]} } }),'inputRange Global')
+
+                                                                console.log(inputRange[2],'inputRange 2')
+                                                                console.log(inputRange,'inputRange All')
+                                                                // flatRef.current.scrollToIndex({
+                                                                //     animated: true,
+                                                                //     // viewPosition: 0.5,
+                                                                //     // viewPosition : 0.75,
+                                                                //     index:3+.1,
+                                                                //     // viewOffset:12
+                                                                //     })
+                                                                                                    // Animated.event(
+                                                                                                    //     [{ nativeEvent: { contentOffset: { x:inputRange[2]} } }],
+                                                                                                    //     { useNativeDriver: false }
+                                                                                                    // )
+                                                                    // animated?: boolean | null;
+                                                                    // index: number;
+                                                                    // viewOffset?: number;
+                                                                    // viewPosition?: number;
+                                                                // console.log(positionItem)
+                                                                // console.log(positionItem-1)
+                                                                // flatRef.current.scrollToIndex({ index: (index + 1), animated: true });
+                                                                // flatRef.current.scrollToIndex({ animated: true,index: positionItem})
+                                                            // }
+                                                        }
+                                                    }}>
+                                                        <AntDesign name="right" size={40} color="blue" />
+                                                    </RectButton> */}
+                                                </View>
+                                            </View>
                                         </Animated.View>
                                     )
                                 })}
@@ -215,3 +301,4 @@ const styles = StyleSheet.create({
         overflow: "hidden"
     },
 });
+

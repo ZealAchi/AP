@@ -89,7 +89,7 @@ export const ContactsM = memo(({ params, home, type, searchContact = [] }) => {
   }, [])
 
   const _renderHeader = (props) => {
-    return (<View style={{ backgroundColor: 'transparent', paddginRight: 10, marginRight: 2 }}>
+    return (<View style={{ backgroundColor: 'transparent', paddginRight: 10, marginRight: 2,marginBottom:8}}>
       <Texto>
         {props.key}
       </Texto>
